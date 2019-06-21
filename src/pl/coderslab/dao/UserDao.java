@@ -32,7 +32,7 @@ public class UserDao {
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());
-            statement.setInt(4, user.getUserGroupId());
+            statement.setInt(4, user.getIdUserGroup());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -58,7 +58,7 @@ public class UserDao {
                 user.setName(resultSet.getString("name"));
                 user.setEmail(resultSet.getString("email"));
                 user.setPassword(resultSet.getString("password"));
-                user.setUserGroupId(resultSet.getInt("user_group_id"));
+                user.setIdUserGroup(resultSet.getInt("user_group_id"));
                 return user;
             }
         } catch (SQLException e) {
@@ -73,7 +73,7 @@ public class UserDao {
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());
-            statement.setInt(4, user.getUserGroupId());
+            statement.setInt(4, user.getIdUserGroup());
             statement.setInt(5, user.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -108,7 +108,7 @@ public class UserDao {
                 user.setName(resultSet.getString("name"));
                 user.setEmail(resultSet.getString("email"));
                 user.setPassword(resultSet.getString("password"));
-                user.setUserGroupId(resultSet.getInt("user_group_id"));
+                user.setIdUserGroup(resultSet.getInt("user_group_id"));
                 users = addToArray(user, users);
             }
             return users;
