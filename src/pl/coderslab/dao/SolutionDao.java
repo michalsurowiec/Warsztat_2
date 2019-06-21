@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+//Na dnie jest zakomentowany findAll. Do sprawdzenia i poprawienia.
 public class SolutionDao {
 
 //    public Solution[] findAllByUserId (int userId) {//copy z userDAO = coś zmoenić

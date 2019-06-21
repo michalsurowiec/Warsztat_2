@@ -8,6 +8,7 @@ public class User {
     private String name;
     private String password; //zahashowane
     private String email; //unikatowy
+    private String skills;
     private int idUserGroup;
 
     public User() {
@@ -17,10 +18,12 @@ public class User {
         this.password = BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
-    public User(String name, String email, String password, int idUserGroup) {
+    public User(int id, String name, String password, String email, String skills, int idUserGroup) {
+        this.id = id;
         this.name = name;
-        this.hashPassword(password);
+        this.password = password;
         this.email = email;
+        this.skills = skills;
         this.idUserGroup = idUserGroup;
     }
 
@@ -62,5 +65,13 @@ public class User {
 
     public void setIdUserGroup(int idUserGroup) {
         this.idUserGroup = idUserGroup;
+    }
+
+    public String getSkills() {
+        return skills;
+    }
+
+    public void setSkills(String skills) {
+        this.skills = skills;
     }
 }

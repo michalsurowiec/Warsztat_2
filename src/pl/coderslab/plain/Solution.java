@@ -12,14 +12,18 @@ public class Solution {
     private String created;
     private String updated;
     private String description;
+    private double rate;
+    private String commentaty;
     private int id_exercise;
     private int id_users;
 
-    public Solution(int id, String created, String updated, String description, int id_exercise, int id_users) {
+    public Solution(int id, String created, String updated, String description, double rate, String commentaty, int id_exercise, int id_users) {
         this.id = id;
         this.created = created;
         this.updated = updated;
         this.description = description;
+        this.rate = rate;
+        this.commentaty = commentaty;
         this.id_exercise = id_exercise;
         this.id_users = id_users;
     }
@@ -74,4 +78,21 @@ public class Solution {
     public void setId_users(int id_users) {
         this.id_users = id_users;
     }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+    public String getCommentaty() {
+        return commentaty;
+    }
+
+    public void setCommentaty(String commentaty) {
+        this.commentaty = commentaty;
+    }
+
 }

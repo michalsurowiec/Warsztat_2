@@ -8,6 +8,7 @@ CREATE TABLE users
 username VARCHAR(255),
 email VARCHAR(255) UNIQUE,
 password VARCHAR(60),
+skills VARCHAR(255),
 id_user_group INT,
 PRIMARY KEY(id),
 FOREIGN KEY(id_user_group) REFERENCES user_group(id))
@@ -23,6 +24,8 @@ CREATE TABLE solution
 created DATETIME,
 updated DATETIME,
 description TEXT,
+rate DECIMAL(2,1),
+commentary VARCHAR(255),
 id_exercise INT,
 id_users INT,
 PRIMARY KEY(id),
