@@ -13,17 +13,17 @@ public class Solution {
     private String updated;
     private String description;
     private double rate;
-    private String commentaty;
+    private String commentary;
     private int id_exercise;
     private int id_users;
 
-    public Solution(int id, String created, String updated, String description, double rate, String commentaty, int id_exercise, int id_users) {
+    public Solution(int id, String created, String updated, String description, double rate, String commentary, int id_exercise, int id_users) {
         this.id = id;
         this.created = created;
         this.updated = updated;
         this.description = description;
         this.rate = rate;
-        this.commentaty = commentaty;
+        this.commentary = commentary;
         this.id_exercise = id_exercise;
         this.id_users = id_users;
     }
@@ -87,12 +87,12 @@ public class Solution {
         this.rate = rate;
     }
 
-    public String getCommentaty() {
-        return commentaty;
+    public String getCommentary() {
+        return commentary;
     }
 
-    public void setCommentaty(String commentaty) {
-        this.commentaty = commentaty;
+    public void setCommentary(String commentary) {
+        this.commentary = commentary;
     }
 
 }

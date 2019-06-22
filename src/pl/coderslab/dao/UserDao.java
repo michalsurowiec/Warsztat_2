@@ -13,15 +13,15 @@ public class UserDao {
     private final String PASSWORD = "coderslab";
 
     private static final String CREATE_USER_QUERY =
-            "INSERT INTO user(name, email, password, skills, user_group_id) VALUES (?, ?, ? ,? ,?)";
+            "INSERT INTO users(name, email, password, skills, user_group_id) VALUES (?, ?, ? ,? ,?)";
     private static final String READ_USER_QUERY =
-            "SELECT * FROM user where id = ?";
+            "SELECT * FROM users where id = ?";
     private static final String UPDATE_USER_QUERY =
-            "UPDATE user SET name = ?, email = ?, password = ?, skills = ?, user_group_id = ? where id = ?";
+            "UPDATE users SET name = ?, email = ?, password = ?, skills = ?, user_group_id = ? where id = ?";
     private static final String DELETE_USER_QUERY =
-            "DELETE FROM user WHERE id = ?";
+            "DELETE FROM users WHERE id = ?";
     private static final String FIND_ALL_USERS_QUERY =
-            "SELECT * FROM user";
+            "SELECT * FROM users";
 
 
 
@@ -118,7 +118,8 @@ public class UserDao {
             return users;
         } catch (SQLException e) {
             e.printStackTrace(); return null;
-        }}
+        }
+    }
 
 
 
