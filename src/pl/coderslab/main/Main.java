@@ -12,6 +12,8 @@ public class Main {
     Do przetestowania:
     UserDao
     SolutionDao
+    GroupDao
+    ExerciseDao
      */
     public static void main(String[] args) {
 
