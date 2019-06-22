@@ -22,8 +22,8 @@ public class UserDao {
             "DELETE FROM users WHERE id = ?";
     private static final String FIND_ALL_USERS_QUERY =
             "SELECT * FROM users";
-
-
+    private static final String FIND_ALL_USERS_BY_USERGROUP_ID_QUERY =
+            "SELECT * FROM users WHERE id_user_group = ?";
 
     public static User create(User user) {
         try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
@@ -32,8 +32,8 @@ public class UserDao {
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());
-            statement.setInt(5, user.getIdUserGroup());
             statement.setString(4, user.getSkills());
+            statement.setInt(5, user.getIdUserGroup());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -121,7 +121,26 @@ public class UserDao {
         }
     }
 
-
-
+    public static User[] findAllByGroupId(int userGroupId) {
+        try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
+            User[] users = new User[0];
+            PreparedStatement statement = conn.prepareStatement(FIND_ALL_USERS_BY_USERGROUP_ID_QUERY);
+            statement.setInt(1, userGroupId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                User user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setName(resultSet.getString("name"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPassword(resultSet.getString("password"));
+                user.setIdUserGroup(resultSet.getInt("user_group_id"));
+                user.setSkills(resultSet.getString("skills"));
+                users = addToArray(user, users);
+            }
+            return users;
+        } catch (SQLException e) {
+            e.printStackTrace(); return null;
+        }
+    }
 
 }
