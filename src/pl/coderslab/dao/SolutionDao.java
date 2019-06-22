@@ -9,25 +9,25 @@ import java.util.Arrays;
 public class SolutionDao {
 
     private static final String CREATE_SOLUTION_QUERY =
-            "INSERT INTO solution VALUES (null, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, null, ?, ?, ?)";
+            "INSERT INTO solution VALUES (null, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?, ?, ?, ?)";
     private static final String READ_SOLUTION_QUERY =
             "SELECT * FROM solution where id = ?";
     private static final String UPDATE_SOLUTION_QUERY =
-            "UPDATE solution SET updated = CURRENT_TIMESTAMP, description = ?, id_Exercise = ? where id = ?";
+            "UPDATE solution SET updated = CURRENT_TIMESTAMP, description = ?, rate = ?, commentary = ?, id_Exercise = ?, id_Users = ? where id = ?";
     private static final String DELETE_SOLUTION_QUERY =
             "DELETE FROM solution WHERE id = ?";
     private static final String FIND_ALL_SOLUTIONS_QUERY =
             "SELECT * FROM solution";
-    private static final String UPDATE_RATE_IN_SOLUTION_QUERY =
-            "UPDATE solution SET rate = ?, commentary = ? where id = ?";
 
     public static Solution create(Solution solution) {
         try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
             PreparedStatement statement =
                     conn.prepareStatement(CREATE_SOLUTION_QUERY, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, solution.getDescription());
-            statement.setInt(2, solution.getId_exercise());
-            statement.setInt(3, solution.getId_users());
+            statement.setDouble(2, solution.getRate());
+            statement.setString(3, solution.getCommentary());
+            statement.setInt(4, solution.getId_exercise());
+            statement.setInt(5, solution.getId_users());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -69,8 +69,11 @@ public class SolutionDao {
         try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
             PreparedStatement statement = conn.prepareStatement(UPDATE_SOLUTION_QUERY);
             statement.setString(1, solution.getDescription());
-            statement.setInt(2, solution.getId_exercise());
-            statement.setInt(3, solution.getId());
+            statement.setDouble(2, solution.getRate());
+            statement.setString(3, solution.getCommentary());
+            statement.setInt(4, solution.getId_exercise());
+            statement.setInt(5, solution.getId_users());
+            statement.setInt(6, solution.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -113,22 +116,6 @@ public class SolutionDao {
             return solutions;
         } catch (SQLException e) {
             e.printStackTrace(); return null;
-        }
-    }
-
-    public static void updateRating (Solution solution) {
-        if (solution.getRate() >= 2.0 && solution.getRate() <= 6.0 && (solution.getRate()) * 10 % 5 == 0) {
-            try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
-                PreparedStatement statement = conn.prepareStatement(UPDATE_RATE_IN_SOLUTION_QUERY);
-                statement.setDouble(1, solution.getRate());
-                statement.setString(2, solution.getCommentary());
-                statement.setInt(3, solution.getId());
-                statement.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Błędna wartość oceny!");
         }
     }
 
