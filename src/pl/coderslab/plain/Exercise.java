@@ -38,4 +38,12 @@ public class Exercise {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return "Exercise{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

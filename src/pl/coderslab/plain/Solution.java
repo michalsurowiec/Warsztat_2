@@ -95,4 +95,17 @@ public class Solution {
         this.commentary = commentary;
     }
 
+    @Override
+    public String toString() {
+        return "Solution{" +
+                "id=" + id +
+                ", created='" + created + '\'' +
+                ", updated='" + updated + '\'' +
+                ", description='" + description + '\'' +
+                ", rate=" + rate +
+                ", commentary='" + commentary + '\'' +
+                ", id_exercise=" + id_exercise +
+                ", id_users=" + id_users +
+                '}';
+    }
 }
