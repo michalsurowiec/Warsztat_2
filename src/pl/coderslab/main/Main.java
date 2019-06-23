@@ -18,8 +18,16 @@ public class Main {
     UserManagement
     UserGroupManagement
     AssignExerciseToUser
+    AddingSolution
+    UserHub
      */
     public static void main(String[] args) {
+
+        User user = new User();
+        user.setName("test");
+        user.setPassword("test");
+        user.setEmail("testemail");
+        UserDao.create(user);
 
     }
 
