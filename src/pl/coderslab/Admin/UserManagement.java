@@ -15,9 +15,7 @@ public class UserManagement {
             System.out.println("Witaj w programie zarządzania użytkownikami. Lista użytkowników:\n");
             User[] userTable = UserDao.findAll();
             for (User eachUser : userTable) {
-                System.out.println("[id: " + eachUser.getId() + ", Imię: " + eachUser.getName() + ", Hasło: " + eachUser.getPassword()
-                + ", E-mail: " + eachUser.getEmail() + ", Zdolności: " + eachUser.getSkills() + ", Id Grupy: " + eachUser.getIdUserGroup()
-                + "]");
+                System.out.println(eachUser.toString());
             }
 
             if (wrongCommand) {
@@ -52,9 +50,7 @@ public class UserManagement {
 
                 try {
                     addingUser = UserDao.create(addingUser);
-                    System.out.println("[id: " + addingUser.getId() + ", Imię: " + addingUser.getName() + ", Hasło: " + addingUser.getPassword()
-                            + ", E-mail: " + addingUser.getEmail() + ", Zdolności: " + addingUser.getSkills() + ", Id Grupy: " + addingUser.getIdUserGroup()
-                            + "]");
+                    System.out.println(addingUser.toString());
                 } catch (NullPointerException npe) {
                     System.out.println("Nie udało się zapisać w bazie danych. Spróbuj ponownie z poprawnymi danymi.");
                 }
@@ -63,9 +59,7 @@ public class UserManagement {
                 System.out.println("Wpisz id użytkownika, którego chcesz edytować");
                 Scanner scannerTwo = new Scanner(System.in);
                 User editUser = UserDao.read(scannerTwo.nextInt());
-                System.out.println("[id: " + editUser.getId() + ", Imię: " + editUser.getName() + ", Hasło: " + editUser.getPassword()
-                        + ", E-mail: " + editUser.getEmail() + ", Zdolności: " + editUser.getSkills() + ", Id Grupy: " + editUser.getIdUserGroup()
-                        + "]");
+                System.out.println(editUser.toString());
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.append("Zmieniono następujące dane użytkownika o id ").append(editUser.getId()).append(": ");
 

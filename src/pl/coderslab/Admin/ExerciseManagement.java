@@ -15,8 +15,7 @@ public class ExerciseManagement {
             System.out.println("Witaj w programie zarządzania zadaniami. Lista zadań:\n");
             Exercise[] exerciseTable = ExerciseDao.findAll();
             for (Exercise eachExercise : exerciseTable) {
-                System.out.println("[id: " + eachExercise.getId() + ", tytuł: " + eachExercise.getTitle() + ", opis: "
-                + eachExercise.getDescription() + " ]");
+                System.out.println(eachExercise.toString());
             }
 
             if (wrongCommand) {
@@ -43,8 +42,7 @@ public class ExerciseManagement {
 
                 try {
                     addingExercise = ExerciseDao.create(addingExercise);
-                    System.out.println("[id: " + addingExercise.getId() + ", tytuł: " + addingExercise.getTitle() + ", opis: "
-                            + addingExercise.getDescription() + " ]");
+                    System.out.println(addingExercise.toString());
                 } catch (NullPointerException npe) {
                     System.out.println("Nie udało się zapisać w bazie danych. Spróbuj ponownie z poprawnymi danymi.");
                 }
@@ -53,8 +51,7 @@ public class ExerciseManagement {
                 System.out.println("Wpisz id zadania, które chcesz edytować");
                 Scanner scannerTwo = new Scanner(System.in);
                 Exercise editExercise = ExerciseDao.read(scannerTwo.nextInt());
-                System.out.println("[id: " + editExercise.getId() + ", tytuł: " + editExercise.getTitle() + ", opis: "
-                        + editExercise.getDescription() + " ]");
+                System.out.println(editExercise.toString());
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.append("Zmieniono następujące dane zadania o id ").append(editExercise.getId()).append(": ");
 
