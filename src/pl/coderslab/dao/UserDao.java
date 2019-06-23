@@ -26,7 +26,7 @@ public class UserDao {
             "SELECT * FROM users WHERE id_user_group = ?";
 
     public static User create(User user) {
-        try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
             PreparedStatement statement =
                     conn.prepareStatement(CREATE_USER_QUERY, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getName());
@@ -50,7 +50,7 @@ public class UserDao {
 
 
     public static User read(int userId) {
-        try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(READ_USER_QUERY);
             statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
@@ -71,7 +71,7 @@ public class UserDao {
     }
 
     public static void update(User user) {
-        try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(UPDATE_USER_QUERY);
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
@@ -86,7 +86,7 @@ public class UserDao {
     }
 
     public static void delete(int userId) {
-        try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(DELETE_USER_QUERY);
             statement.setInt(1, userId);
             statement.executeUpdate();
@@ -102,7 +102,7 @@ public class UserDao {
     }
 
     public static User[] findAll() {
-        try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
             User[] users = new User[0];
             PreparedStatement statement = conn.prepareStatement(FIND_ALL_USERS_QUERY);
             ResultSet resultSet = statement.executeQuery();
@@ -123,7 +123,7 @@ public class UserDao {
     }
 
     public static User[] findAllByGroupId(int userGroupId) {
-        try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
             User[] users = new User[0];
             PreparedStatement statement = conn.prepareStatement(FIND_ALL_USERS_BY_USERGROUP_ID_QUERY);
             statement.setInt(1, userGroupId);

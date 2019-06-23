@@ -20,7 +20,7 @@ public class ExerciseDao {
             "SELECT * FROM exercise";
 
     public static Exercise create(Exercise exercise) {
-        try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
             PreparedStatement statement =
                     conn.prepareStatement(CREATE_EXERCISE_QUERY, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, exercise.getTitle());
@@ -38,7 +38,7 @@ public class ExerciseDao {
     }
 
     public static Exercise read(int exerciseId) {
-        try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(READ_EXERCISE_QUERY);
             statement.setInt(1, exerciseId);
             ResultSet resultSet = statement.executeQuery();
@@ -56,7 +56,7 @@ public class ExerciseDao {
     }
 
     public static void update(Exercise exercise) {
-        try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(UPDATE_EXERCISE_QUERY);
             statement.setString(1, exercise.getTitle());
             statement.setString(2, exercise.getDescription());
@@ -68,7 +68,7 @@ public class ExerciseDao {
     }
 
     public static void delete(int exerciseId) {
-        try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(DELETE_EXERCISE_QUERY);
             statement.setInt(1, exerciseId);
             statement.executeUpdate();
@@ -84,7 +84,7 @@ public class ExerciseDao {
     }
 
     public static Exercise[] findAll() {
-        try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
             Exercise[] exercises = new Exercise[0];
             PreparedStatement statement = conn.prepareStatement(FIND_ALL_EXERCISES_QUERY);
             ResultSet resultSet = statement.executeQuery();

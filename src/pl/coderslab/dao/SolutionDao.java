@@ -24,7 +24,7 @@ public class SolutionDao {
             "SELECT * FROM solution WHERE id_exercise = ?";
 
     public static Solution create(Solution solution) {
-        try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
             PreparedStatement statement =
                     conn.prepareStatement(CREATE_SOLUTION_QUERY, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, solution.getDescription());
@@ -47,7 +47,7 @@ public class SolutionDao {
     }
 
     public static Solution read(int solutionId) {
-        try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(READ_SOLUTION_QUERY);
             statement.setInt(1, solutionId);
             ResultSet resultSet = statement.executeQuery();
@@ -70,7 +70,7 @@ public class SolutionDao {
     }
 
     public static void update(Solution solution) {
-        try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(UPDATE_SOLUTION_QUERY);
             statement.setString(1, solution.getDescription());
             statement.setDouble(2, solution.getRate());
@@ -85,7 +85,7 @@ public class SolutionDao {
     }
 
     public static void delete(int solutionId) {
-        try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(DELETE_SOLUTION_QUERY);
             statement.setInt(1, solutionId);
             statement.executeUpdate();
@@ -101,7 +101,7 @@ public class SolutionDao {
     }
 
     public static Solution[] findAll() {
-        try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
             Solution[] solutions = new Solution[0];
             PreparedStatement statement = conn.prepareStatement(FIND_ALL_SOLUTIONS_QUERY);
             ResultSet resultSet = statement.executeQuery();
@@ -125,7 +125,7 @@ public class SolutionDao {
     }
 
     public static Solution[] findAllByUserId(int userId) {
-        try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
             Solution[] solutions = new Solution[0];
             PreparedStatement statement = conn.prepareStatement(FIND_ALL_SOLUTIONS_BY_USER_ID_QUERY);
             statement.setInt(1, userId);
@@ -150,7 +150,7 @@ public class SolutionDao {
     }
 
     public static Solution[] findAllByExerciseId(int exerciseId) {
-        try (Connection conn = DatabaseUtils.getConnection("java_warsztat_2")) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
             Solution[] solutions = new Solution[0];
             PreparedStatement statement = conn.prepareStatement(FIND_ALL_SOLUTIONS_BY_EXERCISE_ID_QUERY);
             statement.setInt(1, exerciseId);

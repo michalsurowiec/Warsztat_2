@@ -3,10 +3,9 @@ package pl.coderslab.utlis;
 import java.sql.*;
 
 public class DatabaseUtils {
-    public static Connection getConnection(String database) throws SQLException {
+    public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
-                String.format("jdbc:mysql://localhost:3306/%s?" +
-                        "useSSL=false&characterEncoding=utf8", database),
+                "jdbc:mysql://localhost:3306/Warsztat_2?useSSL=false&characterEncoding=utf8",
                 "root",
                 "coderslab");
     }
