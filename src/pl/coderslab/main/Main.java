@@ -14,6 +14,9 @@ public class Main {
     SolutionDao
     GroupDao
     ExerciseDao
+    ExerciseManagement
+    UserManagement
+
      */
     public static void main(String[] args) {
 

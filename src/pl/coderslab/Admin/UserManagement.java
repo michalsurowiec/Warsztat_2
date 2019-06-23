@@ -60,14 +60,14 @@ public class UserManagement {
                 }
 
             } else if (scannerOne.nextLine().equals("edit")) {
-                System.out.println("Wpisz id użytkownika, którego chcesz zedytować");
+                System.out.println("Wpisz id użytkownika, którego chcesz edytować");
                 Scanner scannerTwo = new Scanner(System.in);
                 User editUser = UserDao.read(scannerTwo.nextInt());
                 System.out.println("[id: " + editUser.getId() + ", Imię: " + editUser.getName() + ", Hasło: " + editUser.getPassword()
                         + ", E-mail: " + editUser.getEmail() + ", Zdolności: " + editUser.getSkills() + ", Id Grupy: " + editUser.getIdUserGroup()
                         + "]");
                 StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append("Zmieniono następujące dane użytkownika o id ").append(editUser.getId()).append(" : ");
+                stringBuilder.append("Zmieniono następujące dane użytkownika o id ").append(editUser.getId()).append(": ");
 
                 System.out.println("Wpisz imię użytkownika lub wpisz null, jeżeli nie chcesz nic zmieniać.");
                 Scanner scannerThree = new Scanner(System.in);
@@ -101,14 +101,18 @@ public class UserManagement {
                 System.out.println(stringBuilder.toString());
 
             } else if (scannerOne.nextLine().equals("delete")) {
+
                 System.out.println("Wprowadź id użytkownika, którego chcesz usunąć.");
                 Scanner scannerTwo = new Scanner(System.in);
                 int deleteId = scannerTwo.nextInt();
                 UserDao.delete(deleteId);
                 System.out.println("Usunąłeś użytkownika o id " + deleteId);
+
             } else if (scannerOne.nextLine().equals("quit")) {
+
                 System.out.println("Właśnie opuszczasz program zarządzania użytkownikami.");
                 programWorking = false;
+
             } else {
                 wrongCommand = true;
             }
