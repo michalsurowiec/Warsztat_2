@@ -13,7 +13,7 @@ public class UserDao {
     private final String PASSWORD = "coderslab";
 
     private static final String CREATE_USER_QUERY =
-            "INSERT INTO users(name, email, password, skills, user_group_id) VALUES (?, ?, ? ,? ,?)";
+            "INSERT INTO users VALUES (null, ?, ?, ?, ?, ?)";
     private static final String READ_USER_QUERY =
             "SELECT * FROM users where id = ?";
     private static final String UPDATE_USER_QUERY =

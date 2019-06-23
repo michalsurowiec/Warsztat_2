@@ -2,6 +2,7 @@ package pl.coderslab.User;
 
 import java.util.Scanner;
 
+//Przejrzeć od początku jeszcze raz i zrobić odpowiednio klasę
 public class AddingSolution {
 
     public static void main() {

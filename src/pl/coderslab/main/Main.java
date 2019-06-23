@@ -18,8 +18,8 @@ public class Main {
     UserManagement
     UserGroupManagement
     AssignExerciseToUser
-    AddingSolution
-    UserHub
+
+    Do zrobienia: AddingSolution i UserDao
      */
     public static void main(String[] args) {
 
