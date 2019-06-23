@@ -17,6 +17,7 @@ public class Main {
     ExerciseManagement
     UserManagement
     UserGroupManagement
+    AssignExerciseToUser
      */
     public static void main(String[] args) {
 

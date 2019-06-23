@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class SolutionDao {
 
     private static final String CREATE_SOLUTION_QUERY =
-            "INSERT INTO solution VALUES (null, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?, ?, ?, ?)";
+            "INSERT INTO solution VALUES (null, CURRENT_TIMESTAMP, null, ?, ?, ?, ?, ?)";
     private static final String READ_SOLUTION_QUERY =
             "SELECT * FROM solution where id = ?";
     private static final String UPDATE_SOLUTION_QUERY =
