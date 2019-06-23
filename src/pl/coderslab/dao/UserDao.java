@@ -38,6 +38,7 @@ public class UserDao {
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
                 user.setId(resultSet.getInt(1));
+                user.setPassword(resultSet.getString(3));
             }
             return user;
         } catch (SQLException e) {
