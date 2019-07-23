@@ -5,7 +5,7 @@ import org.mindrot.jbcrypt.BCrypt;
 public class User {
 
     private int id;
-    private String name;
+    private String username;
     private String password; //zahashowane
     private String email; //unikatowy
     private String skills;
@@ -18,9 +18,9 @@ public class User {
         this.password = BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
-    public User(int id, String name, String password, String email, String skills, int idUserGroup) {
+    public User(int id, String username, String password, String email, String skills, int idUserGroup) {
         this.id = id;
-        this.name = name;
+        this.username = username;
         this.password = password;
         this.email = email;
         this.skills = skills;
@@ -31,12 +31,12 @@ public class User {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -79,7 +79,7 @@ public class User {
     public String toString() {
         return "user{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", skills='" + skills + '\'' +

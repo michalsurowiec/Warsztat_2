@@ -35,7 +35,7 @@ public class UserManagement {
 
                     System.out.println("Wpisz imię użytkownika.");
                     Scanner scannerTwo = new Scanner(System.in);
-                    addingUser.setName(scannerTwo.nextLine());
+                    addingUser.setUsername(scannerTwo.nextLine());
 
                     System.out.println("Wpisz hasło użytkownika.");
                     Scanner scannerThree = new Scanner(System.in);
@@ -70,7 +70,7 @@ public class UserManagement {
                     Scanner scannerThree = new Scanner(System.in);
                     String scannerThreeText = scannerThree.nextLine();
                     if (!(scannerThreeText.equals("null"))) {
-                        editUser.setName(scannerThreeText);
+                        editUser.setUsername(scannerThreeText);
                         stringBuilder.append("name, ");
                     }
 
