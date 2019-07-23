@@ -66,6 +66,7 @@ public class UserGroupDao {
 
     public static void delete(int userGroupId) {
         try (Connection conn = DatabaseUtils.getConnection()) {
+            UserDao.deleteByGroupId(userGroupId);
             PreparedStatement statement = conn.prepareStatement(DELETE_USERGROUP_QUERY);
             statement.setInt(1, userGroupId);
             statement.executeUpdate();

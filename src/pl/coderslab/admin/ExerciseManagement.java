@@ -1,4 +1,4 @@
-package pl.coderslab.Admin;
+package pl.coderslab.admin;
 
 import pl.coderslab.dao.ExerciseDao;
 import pl.coderslab.plain.Exercise;

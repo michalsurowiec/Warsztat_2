@@ -24,6 +24,8 @@ public class UserDao {
             "SELECT * FROM users";
     private static final String FIND_ALL_USERS_BY_USERGROUP_ID_QUERY =
             "SELECT * FROM users WHERE id_user_group = ?";
+    private static final String DELETE_USER_BY_USERGROUP_ID_QUERY =
+            "DELETE FROM users WHERE id_user_group = ?";
 
     public static User create(User user) {
         try (Connection conn = DatabaseUtils.getConnection()) {
@@ -87,6 +89,7 @@ public class UserDao {
 
     public static void delete(int userId) {
         try (Connection conn = DatabaseUtils.getConnection()) {
+            SolutionDao.deleteByUserId(userId);
             PreparedStatement statement = conn.prepareStatement(DELETE_USER_QUERY);
             statement.setInt(1, userId);
             statement.executeUpdate();
@@ -141,6 +144,16 @@ public class UserDao {
             return users;
         } catch (SQLException e) {
             e.printStackTrace(); return null;
+        }
+    }
+
+    public static void deleteByGroupId(int userGroupId){
+        try (Connection connection = DatabaseUtils.getConnection()){
+            PreparedStatement statement = connection.prepareStatement(DELETE_USER_BY_USERGROUP_ID_QUERY);
+            statement.setInt(1, userGroupId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

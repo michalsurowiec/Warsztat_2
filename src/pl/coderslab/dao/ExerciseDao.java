@@ -69,6 +69,7 @@ public class ExerciseDao {
 
     public static void delete(int exerciseId) {
         try (Connection conn = DatabaseUtils.getConnection()) {
+            SolutionDao.deleteByExerciseId(exerciseId);
             PreparedStatement statement = conn.prepareStatement(DELETE_EXERCISE_QUERY);
             statement.setInt(1, exerciseId);
             statement.executeUpdate();

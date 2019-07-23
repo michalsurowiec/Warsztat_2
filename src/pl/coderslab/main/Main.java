@@ -1,7 +1,9 @@
 package pl.coderslab.main;
 
 import pl.coderslab.dao.UserDao;
+import pl.coderslab.dao.UserGroupDao;
 import pl.coderslab.plain.User;
+import pl.coderslab.plain.UserGroup;
 
 import java.sql.*;
 import java.util.Arrays;
@@ -23,11 +25,6 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        User user = new User();
-        user.setName("test");
-        user.setPassword("test");
-        user.setEmail("testemail");
-        UserDao.create(user);
 
     }
 

@@ -1,4 +1,4 @@
-package pl.coderslab.User;
+package pl.coderslab.user;
 
 import java.util.Scanner;
 

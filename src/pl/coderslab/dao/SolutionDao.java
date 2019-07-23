@@ -16,6 +16,10 @@ public class SolutionDao {
             "UPDATE solution SET updated = CURRENT_TIMESTAMP, description = ?, rate = ?, commentary = ?, id_exercise = ?, id_users = ? where id = ?";
     private static final String DELETE_SOLUTION_QUERY =
             "DELETE FROM solution WHERE id = ?";
+    private static final String DELETE_SOLUTION_BY_USER_ID_QUERY =
+            "DELETE FROM solution WHERE id_users = ?";
+    private static final String DELETE_SOLUTION_BY_EXERCISE_ID_QUERY =
+            "DELETE FROM solution WHERE id_exercise = ?";
     private static final String FIND_ALL_SOLUTIONS_QUERY =
             "SELECT * FROM solution";
     private static final String FIND_ALL_SOLUTIONS_BY_USER_ID_QUERY =
@@ -88,6 +92,26 @@ public class SolutionDao {
         try (Connection conn = DatabaseUtils.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(DELETE_SOLUTION_QUERY);
             statement.setInt(1, solutionId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteByUserId(int userId){
+        try (Connection conn = DatabaseUtils.getConnection()) {
+            PreparedStatement statement = conn.prepareStatement(DELETE_SOLUTION_BY_USER_ID_QUERY);
+            statement.setInt(1, userId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteByExerciseId(int exerciseId){
+        try (Connection conn = DatabaseUtils.getConnection()) {
+            PreparedStatement statement = conn.prepareStatement(DELETE_SOLUTION_BY_EXERCISE_ID_QUERY);
+            statement.setInt(1, exerciseId);
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
