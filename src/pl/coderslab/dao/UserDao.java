@@ -19,7 +19,7 @@ public class UserDao {
     private static final String READ_USER_BY_EMAIL_QUERY =
             "SELECT * FROM users WHERE email = ?";
     private static final String UPDATE_USER_QUERY =
-            "UPDATE users SET name = ?, email = ?, password = ?, skills = ?, user_group_id = ? where id = ?";
+            "UPDATE users SET username = ?, email = ?, password = ?, skills = ?, user_group_id = ? where id = ?";
     private static final String DELETE_USER_QUERY =
             "DELETE FROM users WHERE id = ?";
     private static final String FIND_ALL_USERS_QUERY =
@@ -42,7 +42,6 @@ public class UserDao {
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
                 user.setId(resultSet.getInt(1));
-                user.setPassword(resultSet.getString(3));
             }
             return user;
         } catch (SQLException e) {
@@ -61,7 +60,7 @@ public class UserDao {
             if (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
-                user.setName(resultSet.getString("name"));
+                user.setName(resultSet.getString("username"));
                 user.setEmail(resultSet.getString("email"));
                 user.setPassword(resultSet.getString("password"));
                 user.setIdUserGroup(resultSet.getInt("user_group_id"));
@@ -82,7 +81,7 @@ public class UserDao {
             if (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
-                user.setName(resultSet.getString("name"));
+                user.setName(resultSet.getString("username"));
                 user.setEmail(resultSet.getString("email"));
                 user.setPassword(resultSet.getString("password"));
                 user.setIdUserGroup(resultSet.getInt("user_group_id"));
@@ -135,7 +134,7 @@ public class UserDao {
             while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
-                user.setName(resultSet.getString("name"));
+                user.setName(resultSet.getString("username"));
                 user.setEmail(resultSet.getString("email"));
                 user.setPassword(resultSet.getString("password"));
                 user.setIdUserGroup(resultSet.getInt("user_group_id"));
@@ -157,7 +156,7 @@ public class UserDao {
             while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
-                user.setName(resultSet.getString("name"));
+                user.setName(resultSet.getString("username"));
                 user.setEmail(resultSet.getString("email"));
                 user.setPassword(resultSet.getString("password"));
                 user.setIdUserGroup(resultSet.getInt("user_group_id"));
