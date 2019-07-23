@@ -38,7 +38,7 @@ public class UserManagement {
 
                 System.out.println("Wpisz hasło użytkownika.");
                 Scanner scannerThree = new Scanner(System.in);
-                addingUser.setPassword(scannerThree.nextLine());
+                addingUser.hashPassword(scannerThree.nextLine());
 
                 System.out.println("Wpisz e-mail użytkownika.");
                 Scanner scannerFour = new Scanner(System.in);
@@ -73,7 +73,7 @@ public class UserManagement {
                 System.out.println("Wpisz hasło użytkownika lub wpisz null, jeżeli nie chcesz nic zmieniać.");
                 Scanner scannerFour = new Scanner(System.in);
                 if (!(scannerFour.nextLine().equals("null"))) {
-                    editUser.setPassword(scannerFour.nextLine());
+                    editUser.hashPassword(scannerFour.nextLine());
                     stringBuilder.append("password, ");
                 }
 
