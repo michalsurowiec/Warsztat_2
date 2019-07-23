@@ -40,8 +40,6 @@ public class SolutionDao {
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
                 solution.setId(resultSet.getInt(1));
-                solution.setCreated(resultSet.getString(2));
-                solution.setUpdated(resultSet.getString(3));
             }
             return solution;
         } catch (SQLException e) {

@@ -12,17 +12,14 @@ import java.util.Scanner;
 public class Main {
 
     /*
-    Do przetestowania:
-    UserDao
-    SolutionDao
-    GroupDao
-    ExerciseDao
-    ExerciseManagement
-    UserManagement
-    UserGroupManagement
-    AssignExerciseToUser
 
-    Do zrobienia: AddingSolution i UserDao
+    Do zrobienia:
+    - AddingSolution
+    - UserDao
+    - AssignExerciseToUser:
+        - przeglądanie rozwiązań które nie zostały dodane
+        - przeglądanie rozwiązań dla konkretnego zadania
+
      */
     public static void main(String[] args) {
         boolean userIsLoggingIn = true;
