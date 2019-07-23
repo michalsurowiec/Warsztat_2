@@ -29,63 +29,72 @@ public class ExerciseManagement {
             System.out.println("quit - wyjdż z programu zarządzania zadaniami");
 
             Scanner scannerOne = new Scanner(System.in);
-            if (scannerOne.nextLine().equals("add")) {
-                Exercise addingExercise = new Exercise();
+            switch (scannerOne.nextLine()) {
+                case "add": {
+                    Exercise addingExercise = new Exercise();
 
-                System.out.println("Wpisz tytuł zadania.");
-                Scanner scannerTwo = new Scanner(System.in);
-                addingExercise.setTitle(scannerTwo.nextLine());
+                    System.out.println("Wpisz tytuł zadania.");
+                    Scanner scannerTwo = new Scanner(System.in);
+                    addingExercise.setTitle(scannerTwo.nextLine());
 
-                System.out.println("Wpisz opis zadania.");
-                Scanner scannerThree = new Scanner(System.in);
-                addingExercise.setDescription(scannerThree.nextLine());
+                    System.out.println("Wpisz opis zadania.");
+                    Scanner scannerThree = new Scanner(System.in);
+                    addingExercise.setDescription(scannerThree.nextLine());
 
-                try {
-                    addingExercise = ExerciseDao.create(addingExercise);
-                    System.out.println(addingExercise.toString());
-                } catch (NullPointerException npe) {
-                    System.out.println("Nie udało się zapisać w bazie danych. Spróbuj ponownie z poprawnymi danymi.");
+                    try {
+                        addingExercise = ExerciseDao.create(addingExercise);
+                        System.out.println(addingExercise.toString());
+                    } catch (NullPointerException npe) {
+                        System.out.println("Nie udało się zapisać w bazie danych. Spróbuj ponownie z poprawnymi danymi.");
+                    }
+
+                    break;
                 }
+                case "edit": {
+                    System.out.println("Wpisz id zadania, które chcesz edytować");
+                    Scanner scannerTwo = new Scanner(System.in);
+                    Exercise editExercise = ExerciseDao.read(scannerTwo.nextInt());
+                    System.out.println(editExercise.toString());
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.append("Zmieniono następujące dane zadania o id ").append(editExercise.getId()).append(": ");
 
-            } else if (scannerOne.nextLine().equals("edit")) {
-                System.out.println("Wpisz id zadania, które chcesz edytować");
-                Scanner scannerTwo = new Scanner(System.in);
-                Exercise editExercise = ExerciseDao.read(scannerTwo.nextInt());
-                System.out.println(editExercise.toString());
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append("Zmieniono następujące dane zadania o id ").append(editExercise.getId()).append(": ");
+                    System.out.println("Wpisz tytuł zadania lub wpisz null, jeżeli nie chcesz nic zmieniać.");
+                    Scanner scannerThree = new Scanner(System.in);
+                    if (!(scannerThree.nextLine().equals("null"))) {
+                        editExercise.setTitle(scannerThree.nextLine());
+                        stringBuilder.append("title, ");
+                    }
 
-                System.out.println("Wpisz tytuł zadania lub wpisz null, jeżeli nie chcesz nic zmieniać.");
-                Scanner scannerThree = new Scanner(System.in);
-                if (!(scannerThree.nextLine().equals("null"))) {
-                    editExercise.setTitle(scannerThree.nextLine());
-                    stringBuilder.append("title, ");
+                    System.out.println("Wpisz opis zadania lub wpisz null, jeżeli nie chcesz nic zmieniać.");
+                    Scanner scannerFour = new Scanner(System.in);
+                    if (!(scannerFour.nextLine().equals("null"))) {
+                        editExercise.setDescription(scannerFour.nextLine());
+                        stringBuilder.append("description");
+                    }
+
+                    ExerciseDao.update(editExercise);
+                    System.out.println(stringBuilder.toString());
+
+                    break;
                 }
+                case "delete": {
 
-                System.out.println("Wpisz opis zadania lub wpisz null, jeżeli nie chcesz nic zmieniać.");
-                Scanner scannerFour = new Scanner(System.in);
-                if (!(scannerFour.nextLine().equals("null"))) {
-                    editExercise.setDescription(scannerFour.nextLine());
-                    stringBuilder.append("description");
+                    System.out.println("Wprowadź id zadania, które chcesz usunąć.");
+                    Scanner scannerTwo = new Scanner(System.in);
+                    int deleteId = scannerTwo.nextInt();
+                    ExerciseDao.delete(deleteId);
+                    System.out.println("Usunąłeś zadanie o id " + deleteId);
+
+                    break;
                 }
+                case "quit":
+                    System.out.println("Właśnie opuszczasz program zarządzania zadaniami.");
+                    programWorking = false;
 
-                ExerciseDao.update(editExercise);
-                System.out.println(stringBuilder.toString());
-
-            } else if (scannerOne.nextLine().equals("delete")) {
-
-                System.out.println("Wprowadź id zadania, które chcesz usunąć.");
-                Scanner scannerTwo = new Scanner(System.in);
-                int deleteId = scannerTwo.nextInt();
-                ExerciseDao.delete(deleteId);
-                System.out.println("Usunąłeś zadanie o id " + deleteId);
-
-            } else if (scannerOne.nextLine().equals("quit")) {
-                System.out.println("Właśnie opuszczasz program zarządzania zadaniami.");
-                programWorking = false;
-
-            } else {
-                wrongCommand = true;
+                    break;
+                default:
+                    wrongCommand = true;
+                    break;
             }
         }
     }

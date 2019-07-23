@@ -27,53 +27,60 @@ public class AssignExerciseToUser {
             System.out.println("quit - wyjdż z programu przypisywania zadań do użytkowników");
 
             Scanner scannerOne = new Scanner(System.in);
-            if (scannerOne.nextLine().equals("add")) {
-                Solution addSolution = new Solution();
+            switch (scannerOne.nextLine()) {
+                case "add": {
+                    Solution addSolution = new Solution();
 
-                User[] userTable = UserDao.findAll();
-                System.out.println();
-                for (User eachUser : userTable) {
-                    System.out.println(eachUser.toString());
+                    User[] userTable = UserDao.findAll();
+                    System.out.println();
+                    for (User eachUser : userTable) {
+                        System.out.println(eachUser.toString());
+                    }
+                    System.out.println("\nWprowadź id użytkownika, któremu chcesz przypisać zadanie.");
+                    Scanner scannerTwo = new Scanner(System.in);
+                    addSolution.setId_users(scannerTwo.nextInt());
+
+                    System.out.println();
+                    Exercise[] exerciseTable = ExerciseDao.findAll();
+                    for (Exercise eachExercise : exerciseTable) {
+                        System.out.println(eachExercise.toString());
+                    }
+                    System.out.println("\nWprowadź id ćwiczenia, które chcesz użytkownikowi przypisać.");
+                    Scanner scannerThree = new Scanner(System.in);
+                    addSolution.setId_exercise(scannerThree.nextInt());
+
+                    SolutionDao.create(addSolution);
+
+                    break;
                 }
-                System.out.println("\nWprowadź id użytkownika, któremu chcesz przypisać zadanie.");
-                Scanner scannerTwo = new Scanner(System.in);
-                addSolution.setId_users(scannerTwo.nextInt());
+                case "view": {
 
-                System.out.println();
-                Exercise[] exerciseTable = ExerciseDao.findAll();
-                for (Exercise eachExercise : exerciseTable) {
-                    System.out.println(eachExercise.toString());
+                    User[] userTable = UserDao.findAll();
+                    System.out.println();
+                    for (User eachUser : userTable) {
+                        System.out.println(eachUser.toString());
+                    }
+                    System.out.println("\nWprowadź id użytkownika, którego zadania chcesz zobaczyć.");
+                    Scanner scannerTwo = new Scanner(System.in);
+
+                    Solution[] solutionTable = SolutionDao.findAllByUserId(scannerTwo.nextInt());
+                    System.out.println();
+                    for (Solution eachSolution : solutionTable) {
+                        System.out.println(eachSolution.toString());
+                    }
+                    System.out.println();
+
+                    break;
                 }
-                System.out.println("\nWprowadź id ćwiczenia, które chcesz użytkownikowi przypisać.");
-                Scanner scannerThree = new Scanner(System.in);
-                addSolution.setId_exercise(scannerThree.nextInt());
+                case "quit":
 
-                SolutionDao.create(addSolution);
+                    System.out.println("Właśnie opuszczasz program przypisywania zadań do użytkowników.");
+                    programWorking = false;
 
-            } else if (scannerOne.nextLine().equals("view")) {
-
-                User[] userTable = UserDao.findAll();
-                System.out.println();
-                for (User eachUser : userTable) {
-                    System.out.println(eachUser.toString());
-                }
-                System.out.println("\nWprowadź id użytkownika, którego zadania chcesz zobaczyć.");
-                Scanner scannerTwo = new Scanner(System.in);
-
-                Solution[] solutionTable = SolutionDao.findAllByUserId(scannerTwo.nextInt());
-                System.out.println();
-                for (Solution eachSolution : solutionTable) {
-                    System.out.println(eachSolution.toString());
-                }
-                System.out.println();
-
-            } else if (scannerOne.nextLine().equals("quit")) {
-
-                System.out.println("Właśnie opuszczasz program przypisywania zadań do użytkowników.");
-                programWorking = false;
-
-            } else {
-                wrongCommand = true;
+                    break;
+                default:
+                    wrongCommand = true;
+                    break;
             }
         }
     }

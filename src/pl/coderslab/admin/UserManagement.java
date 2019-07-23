@@ -29,86 +29,95 @@ public class UserManagement {
             System.out.println("quit - wyjdż z programu zarządzania użytkownikami");
 
             Scanner scannerOne = new Scanner(System.in);
-            if (scannerOne.nextLine().equals("add")) {
-                User addingUser = new User();
+            switch (scannerOne.nextLine()) {
+                case "add": {
+                    User addingUser = new User();
 
-                System.out.println("Wpisz imię użytkownika.");
-                Scanner scannerTwo = new Scanner(System.in);
-                addingUser.setName(scannerTwo.nextLine());
+                    System.out.println("Wpisz imię użytkownika.");
+                    Scanner scannerTwo = new Scanner(System.in);
+                    addingUser.setName(scannerTwo.nextLine());
 
-                System.out.println("Wpisz hasło użytkownika.");
-                Scanner scannerThree = new Scanner(System.in);
-                addingUser.hashPassword(scannerThree.nextLine());
+                    System.out.println("Wpisz hasło użytkownika.");
+                    Scanner scannerThree = new Scanner(System.in);
+                    addingUser.hashPassword(scannerThree.nextLine());
 
-                System.out.println("Wpisz e-mail użytkownika.");
-                Scanner scannerFour = new Scanner(System.in);
-                addingUser.setEmail(scannerFour.nextLine());
+                    System.out.println("Wpisz e-mail użytkownika.");
+                    Scanner scannerFour = new Scanner(System.in);
+                    addingUser.setEmail(scannerFour.nextLine());
 
-                System.out.println("Wpisz grupę użytkownika.");
-                Scanner scannerFive = new Scanner(System.in);
-                addingUser.setIdUserGroup(scannerFive.nextInt());
+                    System.out.println("Wpisz grupę użytkownika.");
+                    Scanner scannerFive = new Scanner(System.in);
+                    addingUser.setIdUserGroup(scannerFive.nextInt());
 
-                try {
-                    addingUser = UserDao.create(addingUser);
-                    System.out.println(addingUser.toString());
-                } catch (NullPointerException npe) {
-                    System.out.println("Nie udało się zapisać w bazie danych. Spróbuj ponownie z poprawnymi danymi.");
+                    try {
+                        addingUser = UserDao.create(addingUser);
+                        System.out.println(addingUser.toString());
+                    } catch (NullPointerException npe) {
+                        System.out.println("Nie udało się zapisać w bazie danych. Spróbuj ponownie z poprawnymi danymi.");
+                    }
+
+                    break;
                 }
+                case "edit": {
+                    System.out.println("Wpisz id użytkownika, którego chcesz edytować");
+                    Scanner scannerTwo = new Scanner(System.in);
+                    User editUser = UserDao.read(scannerTwo.nextInt());
+                    System.out.println(editUser.toString());
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.append("Zmieniono następujące dane użytkownika o id ").append(editUser.getId()).append(": ");
 
-            } else if (scannerOne.nextLine().equals("edit")) {
-                System.out.println("Wpisz id użytkownika, którego chcesz edytować");
-                Scanner scannerTwo = new Scanner(System.in);
-                User editUser = UserDao.read(scannerTwo.nextInt());
-                System.out.println(editUser.toString());
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append("Zmieniono następujące dane użytkownika o id ").append(editUser.getId()).append(": ");
+                    System.out.println("Wpisz imię użytkownika lub wpisz null, jeżeli nie chcesz nic zmieniać.");
+                    Scanner scannerThree = new Scanner(System.in);
+                    if (!(scannerThree.nextLine().equals("null"))) {
+                        editUser.setName(scannerThree.nextLine());
+                        stringBuilder.append("name, ");
+                    }
 
-                System.out.println("Wpisz imię użytkownika lub wpisz null, jeżeli nie chcesz nic zmieniać.");
-                Scanner scannerThree = new Scanner(System.in);
-                if (!(scannerThree.nextLine().equals("null"))) {
-                    editUser.setName(scannerThree.nextLine());
-                    stringBuilder.append("name, ");
+                    System.out.println("Wpisz hasło użytkownika lub wpisz null, jeżeli nie chcesz nic zmieniać.");
+                    Scanner scannerFour = new Scanner(System.in);
+                    if (!(scannerFour.nextLine().equals("null"))) {
+                        editUser.hashPassword(scannerFour.nextLine());
+                        stringBuilder.append("password, ");
+                    }
+
+                    System.out.println("Wpisz e-mail użytkownika lub wpisz null, jeżeli nie chcesz nic zmieniać.");
+                    Scanner scannerFive = new Scanner(System.in);
+                    if (!(scannerFive.nextLine().equals("null"))) {
+                        editUser.setEmail(scannerFive.nextLine());
+                        stringBuilder.append("email, ");
+                    }
+
+                    System.out.println("Wpisz grupę użytkownika lub wpisz 0, jeżeli nie chcesz nic zmieniać.");
+                    Scanner scannerSix = new Scanner(System.in);
+                    if (scannerSix.nextInt() != 0) {
+                        editUser.setIdUserGroup(scannerSix.nextInt());
+                        stringBuilder.append("idUserGroup");
+                    }
+
+                    UserDao.update(editUser);
+                    System.out.println(stringBuilder.toString());
+
+                    break;
                 }
+                case "delete": {
 
-                System.out.println("Wpisz hasło użytkownika lub wpisz null, jeżeli nie chcesz nic zmieniać.");
-                Scanner scannerFour = new Scanner(System.in);
-                if (!(scannerFour.nextLine().equals("null"))) {
-                    editUser.hashPassword(scannerFour.nextLine());
-                    stringBuilder.append("password, ");
+                    System.out.println("Wprowadź id użytkownika, którego chcesz usunąć.");
+                    Scanner scannerTwo = new Scanner(System.in);
+                    int deleteId = scannerTwo.nextInt();
+                    UserDao.delete(deleteId);
+                    System.out.println("Usunąłeś użytkownika o id " + deleteId);
+
+                    break;
                 }
+                case "quit":
 
-                System.out.println("Wpisz e-mail użytkownika lub wpisz null, jeżeli nie chcesz nic zmieniać.");
-                Scanner scannerFive = new Scanner(System.in);
-                if (!(scannerFive.nextLine().equals("null"))) {
-                    editUser.setEmail(scannerFive.nextLine());
-                    stringBuilder.append("email, ");
-                }
+                    System.out.println("Właśnie opuszczasz program zarządzania użytkownikami.");
+                    programWorking = false;
 
-                System.out.println("Wpisz grupę użytkownika lub wpisz 0, jeżeli nie chcesz nic zmieniać.");
-                Scanner scannerSix = new Scanner(System.in);
-                if (scannerSix.nextInt() != 0) {
-                    editUser.setIdUserGroup(scannerSix.nextInt());
-                    stringBuilder.append("idUserGroup");
-                }
-
-                UserDao.update(editUser);
-                System.out.println(stringBuilder.toString());
-
-            } else if (scannerOne.nextLine().equals("delete")) {
-
-                System.out.println("Wprowadź id użytkownika, którego chcesz usunąć.");
-                Scanner scannerTwo = new Scanner(System.in);
-                int deleteId = scannerTwo.nextInt();
-                UserDao.delete(deleteId);
-                System.out.println("Usunąłeś użytkownika o id " + deleteId);
-
-            } else if (scannerOne.nextLine().equals("quit")) {
-
-                System.out.println("Właśnie opuszczasz program zarządzania użytkownikami.");
-                programWorking = false;
-
-            } else {
-                wrongCommand = true;
+                    break;
+                default:
+                    wrongCommand = true;
+                    break;
             }
         }
     }
