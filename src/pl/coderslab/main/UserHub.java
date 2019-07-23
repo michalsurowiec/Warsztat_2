@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class UserHub {
 
     public static void main(String[] args) {
-
+        User loggedUser = UserDao.readByEmail(args[0]);
     }
 
 }

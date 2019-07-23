@@ -16,6 +16,8 @@ public class UserDao {
             "INSERT INTO users VALUES (null, ?, ?, ?, ?, ?)";
     private static final String READ_USER_QUERY =
             "SELECT * FROM users where id = ?";
+    private static final String READ_USER_BY_EMAIL_QUERY =
+            "SELECT * FROM users WHERE email = ?";
     private static final String UPDATE_USER_QUERY =
             "UPDATE users SET name = ?, email = ?, password = ?, skills = ?, user_group_id = ? where id = ?";
     private static final String DELETE_USER_QUERY =
@@ -55,6 +57,27 @@ public class UserDao {
         try (Connection conn = DatabaseUtils.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(READ_USER_QUERY);
             statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                User user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setName(resultSet.getString("name"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPassword(resultSet.getString("password"));
+                user.setIdUserGroup(resultSet.getInt("user_group_id"));
+                user.setSkills(resultSet.getString("skills"));
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static User readByEmail(String email) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
+            PreparedStatement statement = conn.prepareStatement(READ_USER_BY_EMAIL_QUERY);
+            statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 User user = new User();
