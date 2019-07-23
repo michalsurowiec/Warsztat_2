@@ -68,29 +68,33 @@ public class UserManagement {
 
                     System.out.println("Wpisz imię użytkownika lub wpisz null, jeżeli nie chcesz nic zmieniać.");
                     Scanner scannerThree = new Scanner(System.in);
-                    if (!(scannerThree.nextLine().equals("null"))) {
-                        editUser.setName(scannerThree.nextLine());
+                    String scannerThreeText = scannerThree.nextLine();
+                    if (!(scannerThreeText.equals("null"))) {
+                        editUser.setName(scannerThreeText);
                         stringBuilder.append("name, ");
                     }
 
                     System.out.println("Wpisz hasło użytkownika lub wpisz null, jeżeli nie chcesz nic zmieniać.");
                     Scanner scannerFour = new Scanner(System.in);
-                    if (!(scannerFour.nextLine().equals("null"))) {
-                        editUser.hashPassword(scannerFour.nextLine());
+                    String scannerFourText = scannerFour.nextLine();
+                    if (!(scannerFourText.equals("null"))) {
+                        editUser.hashPassword(scannerFourText);
                         stringBuilder.append("password, ");
                     }
 
                     System.out.println("Wpisz e-mail użytkownika lub wpisz null, jeżeli nie chcesz nic zmieniać.");
                     Scanner scannerFive = new Scanner(System.in);
-                    if (!(scannerFive.nextLine().equals("null"))) {
-                        editUser.setEmail(scannerFive.nextLine());
+                    String scannerFiveText = scannerFive.nextLine();
+                    if (!(scannerFiveText.equals("null"))) {
+                        editUser.setEmail(scannerFiveText);
                         stringBuilder.append("email, ");
                     }
 
                     System.out.println("Wpisz grupę użytkownika lub wpisz 0, jeżeli nie chcesz nic zmieniać.");
                     Scanner scannerSix = new Scanner(System.in);
-                    if (scannerSix.nextInt() != 0) {
-                        editUser.setIdUserGroup(scannerSix.nextInt());
+                    int scannerSixInt = scannerSix.nextInt();
+                    if (scannerSixInt != 0) {
+                        editUser.setIdUserGroup(scannerSixInt);
                         stringBuilder.append("idUserGroup");
                     }
 

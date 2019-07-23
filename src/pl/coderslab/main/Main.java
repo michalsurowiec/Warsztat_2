@@ -25,24 +25,24 @@ public class Main {
     Do zrobienia: AddingSolution i UserDao
      */
     public static void main(String[] args) {
-        boolean isUserLogged = false;
+        boolean userIsLoggingIn = true;
         String email = "";
-        while (isUserLogged){
+        while (userIsLoggingIn){
             System.out.println("Podaj swój email lub wpisz null jeżeli chcesz zrezygnować z logowania");
             Scanner scanner = new Scanner(System.in);
-            if (!scanner.nextLine().equals("null")) {
-                email = scanner.next();
+            email = scanner.next();
+            if (!(email.equals("null"))) {
                 User user = UserDao.readByEmail(email);
                 if (user.equals(null)){
                     System.out.println("Taki użytkownik nie istnieje! Spróbuj ponownie");
                 } else {
-                    User userLog = new User();
-                    scanner.reset();
+                    Scanner scannerTwo = new Scanner(System.in);
                     System.out.println("Wpisz hasło");
-                    userLog.hashPassword(scanner.next());
+                    User userLog = new User();
+                    userLog.hashPassword(scannerTwo.next());
                     if (userLog.getPassword().equals(user.getPassword())){
                         System.out.println("Brawo! Zalogowałeś się");
-                        isUserLogged = true;
+                        userIsLoggingIn = false;
                     } else {
                         System.out.println("Niepoprawne hasło! Zaloguj się ponownie");
                     }
@@ -52,7 +52,7 @@ public class Main {
             }
         }
 
-        if (isUserLogged) {
+        if (!(userIsLoggingIn)) {
             String[] user = {email};
             UserHub.main(user);
         }

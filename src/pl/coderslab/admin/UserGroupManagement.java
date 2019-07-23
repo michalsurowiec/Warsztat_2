@@ -56,9 +56,9 @@ public class UserGroupManagement {
 
                     System.out.println("Wpisz nazwę grupy lub wpisz null, jeżeli nie chcesz nic zmieniać.");
                     Scanner scannerThree = new Scanner(System.in);
-
-                    if (!(scannerThree.nextLine().equals("null"))) {
-                        editUserGroup.setName(scannerThree.nextLine());
+                    String scannerThreeText = scannerThree.nextLine();
+                    if (!(scannerThreeText.equals("null"))) {
+                        editUserGroup.setName(scannerThreeText);
                         stringBuilder.append("name");
                     }
 

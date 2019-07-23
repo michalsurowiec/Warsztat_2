@@ -60,15 +60,17 @@ public class ExerciseManagement {
 
                     System.out.println("Wpisz tytuł zadania lub wpisz null, jeżeli nie chcesz nic zmieniać.");
                     Scanner scannerThree = new Scanner(System.in);
-                    if (!(scannerThree.nextLine().equals("null"))) {
-                        editExercise.setTitle(scannerThree.nextLine());
+                    String scannerThreeText = scannerThree.nextLine();
+                    if (!(scannerThreeText.equals("null"))) {
+                        editExercise.setTitle(scannerThreeText);
                         stringBuilder.append("title, ");
                     }
 
                     System.out.println("Wpisz opis zadania lub wpisz null, jeżeli nie chcesz nic zmieniać.");
                     Scanner scannerFour = new Scanner(System.in);
-                    if (!(scannerFour.nextLine().equals("null"))) {
-                        editExercise.setDescription(scannerFour.nextLine());
+                    String scannerFourText = scannerFour.nextLine();
+                    if (!(scannerFourText.equals("null"))) {
+                        editExercise.setDescription(scannerFourText);
                         stringBuilder.append("description");
                     }
 
