@@ -24,6 +24,7 @@ public class AssignExerciseToUser {
             System.out.println("\nWybierz jedną z możliwych akcji i wpisz w konsoli:");
             System.out.println("add - przypisz zadanie do użytkownika");
             System.out.println("view - wyświetl zadania konkretnego użytkownika");
+            System.out.println("delete - usuń zadania konkretnego użytkownika");
             System.out.println("quit - wyjdż z programu przypisywania zadań do użytkowników");
 
             Scanner scannerOne = new Scanner(System.in);
@@ -70,6 +71,21 @@ public class AssignExerciseToUser {
                     }
                     System.out.println();
 
+                    break;
+                }
+
+                case "delete": {
+                    for (Exercise exerciseEach : ExerciseDao.findAll()){
+                        System.out.println(exerciseEach.toString());
+                    }
+                    System.out.println("\nWpisz id ćwiczenia, którego rozwiązania chcesz zobaczyć\n");
+                    Scanner scannerTwo = new Scanner(System.in);
+                    for (Solution solutionEach : SolutionDao.findAllByExerciseId(scannerTwo.nextInt())){
+                        System.out.println(solutionEach.toString());
+                    }
+                    System.out.println("\nWpisz id rozwiązania, które chcesz usunąć\n");
+                    Scanner scannerThree = new Scanner(System.in);
+                    SolutionDao.delete(scannerThree.nextInt());
                     break;
                 }
                 case "quit":

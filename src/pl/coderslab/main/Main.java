@@ -11,14 +11,9 @@ public class Main {
 
     /*
     Do zrobienia:
-    - AddingSolution
     - AssignExerciseToUser:
-        - przeglądanie zadań do których user nie dodał rozwiązania
-        - przeglądanie rozwiązań dla konkretnego zadania
         - ocenianie rozwiązań i dodawanie komentarzy
     - UserManagement - dodanie informacji o zdolnościach kursanta
-    Potestować:
-    - czy rozbudowane usuwanie działa
      */
 
     public static void main(String[] args) {

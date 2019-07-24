@@ -40,10 +40,10 @@ public class AddingSolution {
                     for(Exercise exerciseEach : ExerciseDao.findAllByUserIdWithEmptySolution(user.getId())){
                         System.out.println(exerciseEach.toString());
                     }
-                    System.out.println("Wpisz id zadania, do którego chcesz dodać rozwiązanie");
+                    System.out.println("\nWpisz id zadania, do którego chcesz dodać rozwiązanie\n");
                     Scanner scannerTwo = new Scanner(System.in);
                     Solution solution = SolutionDao.readByUserIdAndExerciseId(user.getId(), scannerTwo.nextInt());
-                    System.out.println("Wpisz rozwiązanie");
+                    System.out.println("\nWpisz rozwiązanie\n");
                     Scanner scannerThree = new Scanner(System.in);
                     solution.setDescription(scannerThree.nextLine());
                     SolutionDao.update(solution);
@@ -70,7 +70,7 @@ public class AddingSolution {
                     StringBuilder stringBuilder = new StringBuilder();
                     stringBuilder.append("Zmieniono następujące dane rozwiązania o id ").append(editSolution.getId()).append(": ");
 
-                    System.out.println("Wpisz treść rozwiązania lub wpisz null, jeżeli nie chcesz nic zmieniać.\n");
+                    System.out.println("\nWpisz treść rozwiązania lub wpisz null, jeżeli nie chcesz nic zmieniać.\n");
                     Scanner scannerThree = new Scanner(System.in);
                     String scannerThreeText = scannerThree.nextLine();
                     if (!(scannerThreeText.equals("null"))) {
