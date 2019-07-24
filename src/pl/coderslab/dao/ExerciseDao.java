@@ -135,7 +135,7 @@ public class ExerciseDao {
     public static Exercise[] findAllByUserIdWithEmptySolution(int userId) {
         try (Connection conn = DatabaseUtils.getConnection()) {
             Exercise[] exercises = new Exercise[0];
-            PreparedStatement statement = conn.prepareStatement(FIND_ALL_EXERCISES_BY_USER_ID);
+            PreparedStatement statement = conn.prepareStatement(FIND_ALL_EXERCISES_BY_USER_ID_WITHOUT_DESCRIPTION_IN_JOINED_SOLUTIONS);
             statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {

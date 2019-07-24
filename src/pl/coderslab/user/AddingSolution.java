@@ -8,7 +8,6 @@ import pl.coderslab.plain.User;
 
 import java.util.Scanner;
 
-//Przejrzeć od początku jeszcze raz i zrobić odpowiednio klasę
 public class AddingSolution {
 
     public static void main(User user) {
@@ -19,9 +18,11 @@ public class AddingSolution {
         while (programWorking) {
 
             if (wrongCommand) {
-                System.out.println("\nWpisałeś złą komendę! Wpisz poprawną w konsoli według poniższego schematu.\n");
+                System.out.println("\nWpisałeś złą komendę! Wpisz poprawną w konsoli według poniższego schematu.");
                 wrongCommand = false;
             }
+
+            System.out.println();
 
             for(Exercise exerciseEach : ExerciseDao.findAllByUserId(user.getId())){
                 System.out.println(exerciseEach.toString());
