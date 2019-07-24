@@ -9,12 +9,6 @@ import java.util.Scanner;
 
 public class Main {
 
-    /*
-    Do zrobienia:
-    - AssignExerciseToUser:
-        - edytowanie rozwiązań
-    */
-
     public static void main(String[] args) {
         boolean userIsLoggingIn = true;
         User user = new User();

@@ -23,6 +23,7 @@ public class AssignExerciseToUser {
             }
             System.out.println("\nWybierz jedną z możliwych akcji i wpisz w konsoli:");
             System.out.println("add - przypisz zadanie do użytkownika");
+            System.out.println("edit - przypisz zadanie do użytkownika");
             System.out.println("view - wyświetl zadania konkretnego użytkownika");
             System.out.println("rate - oceń wypełnione zadania");
             System.out.println("delete - usuń zadania konkretnego użytkownika");
@@ -31,13 +32,14 @@ public class AssignExerciseToUser {
             Scanner scannerOne = new Scanner(System.in);
             switch (scannerOne.nextLine()) {
                 case "add": {
-                    Solution addSolution = new Solution();
 
                     User[] userTable = UserDao.findAll();
                     System.out.println();
                     for (User eachUser : userTable) {
                         System.out.println(eachUser.toString());
                     }
+
+                    Solution addSolution = new Solution();
                     System.out.println("\nWprowadź id użytkownika, któremu chcesz przypisać zadanie.");
                     Scanner scannerTwo = new Scanner(System.in);
                     addSolution.setId_users(scannerTwo.nextInt());
@@ -55,6 +57,26 @@ public class AssignExerciseToUser {
 
                     break;
                 }
+
+                case "edit": {
+                    System.out.println();
+                    for (User eachUser : UserDao.findAll()) {
+                        System.out.println(eachUser.toString());
+                    }
+                    System.out.println("\nWprowadź id użytkownika, któremu chcesz zmodyfikować przypisane zadania.\n");
+                    Scanner scannerTwo = new Scanner(System.in);
+                    for (Solution solutionEach : SolutionDao.findAllByUserId(scannerTwo.nextInt())){
+                        System.out.println(solutionEach.toString());
+                    }
+
+                    System.out.println("\nWpisz id rozwiązania, które chcesz edytować\n");
+                    Scanner scannerThree = new Scanner(System.in);
+                    Solution editSolution = SolutionDao.read(scannerThree.nextInt());
+                    //TODO Dodać ścieżkę edytowania w rozwiązaniu następujących pól: rate, commentary, exercise_id, users_id
+
+                    break;
+                }
+
                 case "view": {
 
                     User[] userTable = UserDao.findAll();
