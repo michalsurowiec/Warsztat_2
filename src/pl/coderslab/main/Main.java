@@ -2,12 +2,9 @@ package pl.coderslab.main;
 
 import org.mindrot.jbcrypt.BCrypt;
 import pl.coderslab.dao.UserDao;
-import pl.coderslab.dao.UserGroupDao;
 import pl.coderslab.plain.User;
-import pl.coderslab.plain.UserGroup;
+import pl.coderslab.user.UserHub;
 
-import java.sql.*;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -16,27 +13,30 @@ public class Main {
     Do zrobienia:
     - AddingSolution
     - AssignExerciseToUser:
-        - przeglądanie rozwiązań które nie zostały dodane
+        - przeglądanie zadań do których user nie dodał rozwiązania
         - przeglądanie rozwiązań dla konkretnego zadania
+        - ocenianie rozwiązań i dodawanie komentarzy
     - UserManagement - dodanie informacji o zdolnościach kursanta
      */
 
     public static void main(String[] args) {
         boolean userIsLoggingIn = true;
-        String email = "";
+        User user = new User();
         while (userIsLoggingIn){
+            String email = "";
             System.out.println("Podaj swój email lub wpisz quit jeżeli chcesz zrezygnować z logowania");
             Scanner scanner = new Scanner(System.in);
             email = scanner.next();
             if (!(email.equals("quit"))) {
-                User user = UserDao.readByEmail(email);
-                if (user == null){
+                User userTest = UserDao.readByEmail(email);
+                if (userTest == null){
                     System.out.println("Taki użytkownik nie istnieje! Spróbuj ponownie");
                 } else {
                     Scanner scannerTwo = new Scanner(System.in);
                     System.out.println("Wpisz hasło");
-                    if (BCrypt.checkpw(scannerTwo.nextLine(), user.getPassword())){
+                    if (BCrypt.checkpw(scannerTwo.nextLine(), userTest.getPassword())){
                         System.out.println("Brawo! Zalogowałeś się");
+                        user = userTest;
                         userIsLoggingIn = false;
                     } else {
                         System.out.println("Niepoprawne hasło! Zaloguj się ponownie");
@@ -48,7 +48,6 @@ public class Main {
         }
 
         if (!(userIsLoggingIn)) {
-            String[] user = {email};
             UserHub.main(user);
         }
     }

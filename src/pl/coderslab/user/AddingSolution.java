@@ -1,11 +1,13 @@
 package pl.coderslab.user;
 
+import pl.coderslab.plain.User;
+
 import java.util.Scanner;
 
 //Przejrzeć od początku jeszcze raz i zrobić odpowiednio klasę
 public class AddingSolution {
 
-    public static void main() {
+    public static void main(User user) {
 
         boolean programWorking = true;
         boolean wrongCommand = false;
@@ -17,24 +19,38 @@ public class AddingSolution {
                 wrongCommand = false;
             }
 
+            //Lista ćwiczeń użytkownika
+
             System.out.println("Wybierz jedną z możliwych akcji i wpisz w konsoli:");
-            System.out.println("add - dodaj użytkownika do bazy danych");
-            System.out.println("edit - edytuj dane konkretnego użytkownika");
-            System.out.println("delete - usuń użytkownika z bazy danych");
-            System.out.println("quit - wyjdż z programu zarządzania użytkownikami");
+            System.out.println("add - dodaj rozwiązanie do ćwiczenia"); //wyświetlić listę ćwiczeń które nie zostały rozwiązane
+            System.out.println("view - pokaż wszystkie dodane rozwiązania");
+            System.out.println("edit - edytuj rozwiązanie");
+            System.out.println("delete - usuń rozwiązanie");
+            System.out.println("quit - wyjdż z modułu zarządzania rozwiązaniami");
 
             Scanner scannerOne = new Scanner(System.in);
-            if (scannerOne.nextLine().equals("add")) {
+            switch (scannerOne.nextLine()) {
+                case "add":
 
-            } else if (scannerOne.nextLine().equals("view")) {
+                    break;
+                case "view":
 
-            } else if (scannerOne.nextLine().equals("quit")) {
+                    break;
+                case "edit":
 
-                System.out.println("Właśnie opuszczasz program dodawania rozwiązań.");
-                programWorking = false;
+                    break;
+                case "delete":
 
-            } else {
-                wrongCommand = true;
+                    break;
+                case "quit":
+
+                    System.out.println("Właśnie opuszczasz program dodawania rozwiązań.");
+                    programWorking = false;
+
+                    break;
+                default:
+                    wrongCommand = true;
+                    break;
             }
         }
     }
