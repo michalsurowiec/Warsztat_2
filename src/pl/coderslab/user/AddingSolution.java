@@ -34,27 +34,31 @@ public class AddingSolution {
 
             Scanner scannerOne = new Scanner(System.in);
             switch (scannerOne.nextLine()) {
-                case "add":
-
+                case "add": {
+                    for(Exercise exerciseEach : ExerciseDao.findAllByUserIdWithEmptySolution(user.getId())){
+                        System.out.println(exerciseEach.toString());
+                    }
+                    
                     break;
-                case "view":
-
+                }
+                case "view": {
                     break;
-                case "edit":
-
+                }
+                case "edit": {
                     break;
-                case "delete":
-
+                }
+                case "delete": {
                     break;
-                case "quit":
-
+                }
+                case "quit": {
                     System.out.println("\nWłaśnie opuszczasz program dodawania rozwiązań.");
                     programWorking = false;
-
                     break;
-                default:
+                }
+                default: {
                     wrongCommand = true;
                     break;
+                }
             }
         }
     }
