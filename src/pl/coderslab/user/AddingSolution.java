@@ -1,7 +1,9 @@
 package pl.coderslab.user;
 
 import pl.coderslab.dao.ExerciseDao;
+import pl.coderslab.dao.SolutionDao;
 import pl.coderslab.plain.Exercise;
+import pl.coderslab.plain.Solution;
 import pl.coderslab.plain.User;
 
 import java.util.Scanner;
@@ -38,7 +40,13 @@ public class AddingSolution {
                     for(Exercise exerciseEach : ExerciseDao.findAllByUserIdWithEmptySolution(user.getId())){
                         System.out.println(exerciseEach.toString());
                     }
-                    
+                    System.out.println("Wpisz id zadania, do którego chcesz dodać rozwiązanie");
+                    Scanner scannerTwo = new Scanner(System.in);
+                    Solution solution = SolutionDao.readByUserIdAndExerciseId(user.getId(), scannerTwo.nextInt());
+                    System.out.println("Wpisz rozwiązanie");
+                    Scanner scannerThree = new Scanner(System.in);
+                    solution.setDescription(scannerThree.nextLine());
+                    SolutionDao.update(solution);
                     break;
                 }
                 case "view": {

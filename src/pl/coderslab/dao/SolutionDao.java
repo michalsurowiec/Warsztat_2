@@ -11,7 +11,9 @@ public class SolutionDao {
     private static final String CREATE_SOLUTION_QUERY =
             "INSERT INTO solution VALUES (null, CURRENT_TIMESTAMP, null, ?, ?, ?, ?, ?)";
     private static final String READ_SOLUTION_QUERY =
-            "SELECT * FROM solution where id = ?";
+            "SELECT * FROM solution WHERE id = ?";
+    private static final String READ_SOLUTION_BY_USER_ID_AND_EXERCISE_ID_QUERY =
+            "SELECT * FROM solution WHERE id_users = ? AND id_exercise = ?";
     private static final String UPDATE_SOLUTION_QUERY =
             "UPDATE solution SET updated = CURRENT_TIMESTAMP, description = ?, rate = ?, commentary = ?, id_exercise = ?, id_users = ? where id = ?";
     private static final String DELETE_SOLUTION_QUERY =
@@ -52,6 +54,30 @@ public class SolutionDao {
         try (Connection conn = DatabaseUtils.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(READ_SOLUTION_QUERY);
             statement.setInt(1, solutionId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                Solution solution = new Solution();
+                solution.setId(resultSet.getInt(1));
+                solution.setCreated(resultSet.getString(2));
+                solution.setUpdated(resultSet.getString(3));
+                solution.setDescription(resultSet.getString(4));
+                solution.setRate(resultSet.getDouble(5));
+                solution.setCommentary(resultSet.getString(6));
+                solution.setId_exercise(resultSet.getInt(7));
+                solution.setId_users(resultSet.getInt(8));
+                return solution;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Solution readByUserIdAndExerciseId(int userId, int exerciseId) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
+            PreparedStatement statement = conn.prepareStatement(READ_SOLUTION_BY_USER_ID_AND_EXERCISE_ID_QUERY);
+            statement.setInt(1, userId);
+            statement.setInt(2, exerciseId);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 Solution solution = new Solution();
