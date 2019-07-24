@@ -24,6 +24,7 @@ public class AssignExerciseToUser {
             System.out.println("\nWybierz jedną z możliwych akcji i wpisz w konsoli:");
             System.out.println("add - przypisz zadanie do użytkownika");
             System.out.println("view - wyświetl zadania konkretnego użytkownika");
+            System.out.println("rate - oceń wypełnione zadania");
             System.out.println("delete - usuń zadania konkretnego użytkownika");
             System.out.println("quit - wyjdż z programu przypisywania zadań do użytkowników");
 
@@ -71,6 +72,36 @@ public class AssignExerciseToUser {
                     }
                     System.out.println();
 
+                    break;
+                }
+
+                case "rate": {
+                    for (Solution solutionEach : SolutionDao.findAllByNotNullDescriptionAndRateEqualZero()){
+                        System.out.println(solutionEach.toString());
+                    }
+                    System.out.println("\nWprowadź id rozwiązania, które chcesz ocenić i skomentować\n");
+                    Scanner scannerTwo = new Scanner(System.in);
+                    Solution ratedSolution = SolutionDao.read(scannerTwo.nextInt());
+
+                    boolean checkingRate = true;
+                    while (checkingRate){
+                        System.out.println("Wpisz ocenę z zakresu od 2.0 do 5.0\n");
+                        Scanner scannerThree = new Scanner(System.in);
+                        double rate = scannerThree.nextDouble();
+                        if (rate >= 2.0 && rate <= 5.0){
+                            ratedSolution.setRate(rate);
+                            checkingRate = false;
+                        } else {
+                            System.out.println("Niepoprawna ocena! Wpisz poprawnie.\n");
+                        }
+                    }
+
+                    System.out.println("Wpisz komentarz do oceny\n");
+                    Scanner scannerThree = new Scanner(System.in);
+                    ratedSolution.setCommentary(scannerThree.nextLine());
+
+                    System.out.println(ratedSolution.toString());
+                    SolutionDao.update(ratedSolution);
                     break;
                 }
 

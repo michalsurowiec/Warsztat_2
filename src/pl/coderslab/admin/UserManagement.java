@@ -11,7 +11,7 @@ public class UserManagement {
         boolean programWorking = true;
         boolean wrongCommand = false;
         while (programWorking) {
-            
+
             //Wstęp programu, wyświetlający listę i pytający o akcję
             System.out.println("Witaj w programie zarządzania użytkownikami. Lista użytkowników:\n");
             User[] userTable = UserDao.findAll();

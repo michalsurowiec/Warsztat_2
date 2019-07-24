@@ -12,9 +12,8 @@ public class Main {
     /*
     Do zrobienia:
     - AssignExerciseToUser:
-        - ocenianie rozwiązań i dodawanie komentarzy
-    - UserManagement - dodanie informacji o zdolnościach kursanta
-     */
+        - edytowanie rozwiązań
+    */
 
     public static void main(String[] args) {
         boolean userIsLoggingIn = true;

@@ -28,6 +28,8 @@ public class SolutionDao {
             "SELECT * FROM solution WHERE id_users = ?";
     private static final String FIND_ALL_SOLUTIONS_BY_EXERCISE_ID_QUERY =
             "SELECT * FROM solution WHERE id_exercise = ?";
+    private static final String FIND_ALL_SOLUTIONS_WITH_0_RATE_AND_NOTNULL_DESCRIPTION_QUERY =
+            "SELECT * FROM solution WHERE description IS NOT NULL AND rate = 0.0";
 
     public static Solution create(Solution solution) {
         try (Connection conn = DatabaseUtils.getConnection()) {
@@ -202,6 +204,30 @@ public class SolutionDao {
             Solution[] solutions = new Solution[0];
             PreparedStatement statement = conn.prepareStatement(FIND_ALL_SOLUTIONS_BY_EXERCISE_ID_QUERY);
             statement.setInt(1, exerciseId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Solution solution = new Solution();
+                solution.setId(resultSet.getInt(1));
+                solution.setCreated(resultSet.getString(2));
+                solution.setUpdated(resultSet.getString(3));
+                solution.setDescription(resultSet.getString(4));
+                solution.setRate(resultSet.getDouble(5));
+                solution.setCommentary(resultSet.getString(6));
+                solution.setId_exercise(resultSet.getInt(7));
+                solution.setId_users(resultSet.getInt(8));
+                solutions = addToArray(solution, solutions);
+            }
+            return solutions;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Solution[] findAllByNotNullDescriptionAndRateEqualZero() {
+        try (Connection conn = DatabaseUtils.getConnection()) {
+            Solution[] solutions = new Solution[0];
+            PreparedStatement statement = conn.prepareStatement(FIND_ALL_SOLUTIONS_WITH_0_RATE_AND_NOTNULL_DESCRIPTION_QUERY);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Solution solution = new Solution();
