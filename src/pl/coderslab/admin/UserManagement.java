@@ -11,6 +11,7 @@ public class UserManagement {
         boolean programWorking = true;
         boolean wrongCommand = false;
         while (programWorking) {
+            
             //Wstęp programu, wyświetlający listę i pytający o akcję
             System.out.println("Witaj w programie zarządzania użytkownikami. Lista użytkowników:\n");
             User[] userTable = UserDao.findAll();
@@ -44,6 +45,10 @@ public class UserManagement {
                     System.out.println("Wpisz e-mail użytkownika.");
                     Scanner scannerFour = new Scanner(System.in);
                     addingUser.setEmail(scannerFour.nextLine());
+
+                    System.out.println("Wpisz umiejętności użytkownika.");
+                    Scanner scannerSix = new Scanner(System.in);
+                    addingUser.setSkills(scannerSix.nextLine());
 
                     System.out.println("Wpisz grupę użytkownika.");
                     Scanner scannerFive = new Scanner(System.in);
@@ -90,11 +95,19 @@ public class UserManagement {
                         stringBuilder.append("email, ");
                     }
 
-                    System.out.println("Wpisz grupę użytkownika lub wpisz 0, jeżeli nie chcesz nic zmieniać.");
+                    System.out.println("Wpisz umiejętności użytkownika lub wpisz null, jeżeli nie chcesz nic zmieniać.");
                     Scanner scannerSix = new Scanner(System.in);
-                    int scannerSixInt = scannerSix.nextInt();
-                    if (scannerSixInt != 0) {
-                        editUser.setIdUserGroup(scannerSixInt);
+                    String scannerSixText = scannerSix.nextLine();
+                    if (!(scannerSixText.equals("null"))) {
+                        editUser.setSkills(scannerSixText);
+                        stringBuilder.append("skills, ");
+                    }
+
+                    System.out.println("Wpisz grupę użytkownika lub wpisz 0, jeżeli nie chcesz nic zmieniać.");
+                    Scanner scannerSeven = new Scanner(System.in);
+                    int scannerSevenInt = scannerSeven.nextInt();
+                    if (scannerSevenInt != 0) {
+                        editUser.setIdUserGroup(scannerSevenInt);
                         stringBuilder.append("idUserGroup");
                     }
 
