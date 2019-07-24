@@ -31,7 +31,6 @@ public class AddingSolution {
             System.out.println("add - dodaj rozwiązanie do ćwiczenia"); //wyświetlić listę ćwiczeń które nie zostały rozwiązane
             System.out.println("view - pokaż wszystkie dodane rozwiązania");
             System.out.println("edit - edytuj rozwiązanie");
-            System.out.println("delete - usuń rozwiązanie");
             System.out.println("quit - wyjdż z modułu zarządzania rozwiązaniami\n");
 
             Scanner scannerOne = new Scanner(System.in);
@@ -50,12 +49,37 @@ public class AddingSolution {
                     break;
                 }
                 case "view": {
+                    for (Solution solutionEach : SolutionDao.findAllByUserId(user.getId())){
+                        if (solutionEach.getDescription() != null){
+                            System.out.println(solutionEach.toString());
+                        }
+                    }
                     break;
                 }
                 case "edit": {
-                    break;
-                }
-                case "delete": {
+                    for (Solution solutionEach : SolutionDao.findAllByUserId(user.getId())){
+                        if (solutionEach.getDescription() != null){
+                            System.out.println(solutionEach.toString());
+                        }
+                    }
+                    System.out.println("\nWpisz id rozwiązania, które chcesz edytować\n");
+                    Scanner scannerTwo = new Scanner(System.in);
+                    Solution editSolution = SolutionDao.read(scannerTwo.nextInt());
+                    System.out.println(editSolution.toString());
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.append("Zmieniono następujące dane rozwiązania o id ").append(editSolution.getId()).append(": ");
+
+                    System.out.println("Wpisz treść rozwiązania lub wpisz null, jeżeli nie chcesz nic zmieniać.\n");
+                    Scanner scannerThree = new Scanner(System.in);
+                    String scannerThreeText = scannerThree.nextLine();
+                    if (!(scannerThreeText.equals("null"))) {
+                        editSolution.setDescription(scannerThreeText);
+                        stringBuilder.append("description, ");
+                    }
+
+                    SolutionDao.update(editSolution);
+                    System.out.println(stringBuilder.toString());
+
                     break;
                 }
                 case "quit": {

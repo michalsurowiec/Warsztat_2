@@ -17,6 +17,8 @@ public class Main {
         - przeglądanie rozwiązań dla konkretnego zadania
         - ocenianie rozwiązań i dodawanie komentarzy
     - UserManagement - dodanie informacji o zdolnościach kursanta
+    Potestować:
+    - czy rozbudowane usuwanie działa
      */
 
     public static void main(String[] args) {
