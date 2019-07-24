@@ -21,11 +21,11 @@ public class AdminHub {
             System.out.println("\nWitaj w panelu Admina! Poniżej masz listę modułów dostępnych do użycia.\n" +
                     "Wpisz odpowiednią cyfrę przy komendzie aby przejść do modułu lub wpisz quit aby opuścić panel admina.\n" +
                     "Lista komend:\n" +
-                    "1 - Przypisz ćwiczenie użytkownikowi lub sprawdź jego rozwiązania\n" +
-                    "2 - Zarządzaj ćwiczeniami\n" +
-                    "3 - Zarządzaj grupami użytkowników\n" +
-                    "4 - Zarządzaj użytkownikami\n" +
-                    "quit - Opuść program");
+                    "1 - przypisz ćwiczenie użytkownikowi lub sprawdź jego rozwiązania\n" +
+                    "2 - zarządzaj ćwiczeniami\n" +
+                    "3 - zarządzaj grupami użytkowników\n" +
+                    "4 - zarządzaj użytkownikami\n" +
+                    "quit - opuść program");
 
             Scanner scanner = new Scanner(System.in);
             switch (scanner.next()) {

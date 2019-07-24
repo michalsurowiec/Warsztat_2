@@ -1,5 +1,7 @@
 package pl.coderslab.user;
 
+import pl.coderslab.dao.ExerciseDao;
+import pl.coderslab.plain.Exercise;
 import pl.coderslab.plain.User;
 
 import java.util.Scanner;
@@ -15,18 +17,20 @@ public class AddingSolution {
         while (programWorking) {
 
             if (wrongCommand) {
-                System.out.println("\nWpisałeś złą komendę! Wpisz poprawną w konsoli według poniższego schematu.");
+                System.out.println("\nWpisałeś złą komendę! Wpisz poprawną w konsoli według poniższego schematu.\n");
                 wrongCommand = false;
             }
 
-            //Lista ćwiczeń użytkownika
+            for(Exercise exerciseEach : ExerciseDao.findAllByUserId(user.getId())){
+                System.out.println(exerciseEach.toString());
+            }
 
-            System.out.println("Wybierz jedną z możliwych akcji i wpisz w konsoli:");
+            System.out.println("\nWybierz jedną z możliwych akcji i wpisz w konsoli:");
             System.out.println("add - dodaj rozwiązanie do ćwiczenia"); //wyświetlić listę ćwiczeń które nie zostały rozwiązane
             System.out.println("view - pokaż wszystkie dodane rozwiązania");
             System.out.println("edit - edytuj rozwiązanie");
             System.out.println("delete - usuń rozwiązanie");
-            System.out.println("quit - wyjdż z modułu zarządzania rozwiązaniami");
+            System.out.println("quit - wyjdż z modułu zarządzania rozwiązaniami\n");
 
             Scanner scannerOne = new Scanner(System.in);
             switch (scannerOne.nextLine()) {
@@ -44,7 +48,7 @@ public class AddingSolution {
                     break;
                 case "quit":
 
-                    System.out.println("Właśnie opuszczasz program dodawania rozwiązań.");
+                    System.out.println("\nWłaśnie opuszczasz program dodawania rozwiązań.");
                     programWorking = false;
 
                     break;

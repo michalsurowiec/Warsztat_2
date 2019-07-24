@@ -18,6 +18,10 @@ public class ExerciseDao {
             "DELETE FROM exercise WHERE id = ?";
     private static final String FIND_ALL_EXERCISES_QUERY =
             "SELECT * FROM exercise";
+    private static final String FIND_ALL_EXERCISES_BY_USER_ID =
+            "SELECT exercise.* FROM exercise " +
+                    "JOIN solution ON exercise.id = solution.id_exercise " +
+                    "WHERE id_users = ?";
 
     public static Exercise create(Exercise exercise) {
         try (Connection conn = DatabaseUtils.getConnection()) {
@@ -98,7 +102,28 @@ public class ExerciseDao {
             }
             return exercises;
         } catch (SQLException e) {
-            e.printStackTrace(); return null;
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Exercise[] findAllByUserId(int userId) {
+        try (Connection conn = DatabaseUtils.getConnection()) {
+            Exercise[] exercises = new Exercise[0];
+            PreparedStatement statement = conn.prepareStatement(FIND_ALL_EXERCISES_BY_USER_ID);
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Exercise exercise = new Exercise();
+                exercise.setId(resultSet.getInt(1));
+                exercise.setTitle(resultSet.getString(2));
+                exercise.setDescription(resultSet.getString(3));
+                exercises = addToArray(exercise, exercises);
+            }
+            return exercises;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
