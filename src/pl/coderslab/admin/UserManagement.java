@@ -1,7 +1,9 @@
 package pl.coderslab.admin;
 
 import pl.coderslab.dao.UserDao;
+import pl.coderslab.dao.UserGroupDao;
 import pl.coderslab.plain.User;
+import pl.coderslab.plain.UserGroup;
 
 import java.util.Scanner;
 
@@ -51,6 +53,7 @@ public class UserManagement {
                         Scanner scannerSix = new Scanner(System.in);
                         addingUser.setSkills(scannerSix.nextLine());
 
+
                         System.out.println("Wpisz grupę użytkownika.");
                         Scanner scannerFive = new Scanner(System.in);
                         addingUser.setIdUserGroup(scannerFive.nextInt());
@@ -96,7 +99,7 @@ public class UserManagement {
                             stringBuilder.append("email, ");
                         }
 
-                        System.out.println("Wpisz umiejętności użytkownika lub wpisz null, jeżeli nie chcesz nic zmieniać.");
+                        System.out.println("Wpisz umiejętności użytkownika lub wpisz null, jeżeli nie chcesz nic zmieniać.\n");
                         Scanner scannerSix = new Scanner(System.in);
                         String scannerSixText = scannerSix.nextLine();
                         if (!(scannerSixText.equals("null"))) {
@@ -104,7 +107,10 @@ public class UserManagement {
                             stringBuilder.append("skills, ");
                         }
 
-                        System.out.println("Wpisz grupę użytkownika lub wpisz 0, jeżeli nie chcesz nic zmieniać.");
+                        for (UserGroup userGroupEach : UserGroupDao.findAll()){
+                            System.out.println(userGroupEach.toString());
+                        }
+                        System.out.println("\nWpisz grupę użytkownika lub wpisz 0, jeżeli nie chcesz nic zmieniać.\n");
                         Scanner scannerSeven = new Scanner(System.in);
                         int scannerSevenInt = scannerSeven.nextInt();
                         if (scannerSevenInt != 0) {

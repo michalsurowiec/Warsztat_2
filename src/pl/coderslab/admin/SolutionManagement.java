@@ -181,12 +181,7 @@ public class SolutionManagement {
                     }
 
                     case "delete": {
-                        for (Exercise exerciseEach : ExerciseDao.findAll()) {
-                            System.out.println(exerciseEach.toString());
-                        }
-                        System.out.println("\nWpisz id ćwiczenia, którego rozwiązania chcesz zobaczyć\n");
-                        Scanner scannerTwo = new Scanner(System.in);
-                        for (Solution solutionEach : SolutionDao.findAllByExerciseId(scannerTwo.nextInt())) {
+                        for (Solution solutionEach : SolutionDao.findAll()) {
                             System.out.println(solutionEach.toString());
                         }
                         System.out.println("\nWpisz id rozwiązania, które chcesz usunąć\n");
