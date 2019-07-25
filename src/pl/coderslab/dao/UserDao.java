@@ -45,7 +45,8 @@ public class UserDao {
             }
             return user;
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Wystąpił błąd! Upewnij się, że poprawnie wpisujesz dane.");
+            //e.printStackTrace();
             return null;
         }
     }
@@ -105,7 +106,8 @@ public class UserDao {
             statement.setInt(6, user.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Wystąpił błąd! Upewnij się, że poprawnie wpisujesz dane.");
+            //e.printStackTrace();
         }
     }
 

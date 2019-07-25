@@ -34,64 +34,68 @@ public class AddingSolution {
             System.out.println("edit - edytuj rozwiązanie");
             System.out.println("quit - wyjdż z modułu zarządzania rozwiązaniami\n");
 
-            Scanner scannerOne = new Scanner(System.in);
-            switch (scannerOne.nextLine()) {
-                case "add": {
-                    for(Exercise exerciseEach : ExerciseDao.findAllByUserIdWithEmptySolution(user.getId())){
-                        System.out.println(exerciseEach.toString());
-                    }
-                    System.out.println("\nWpisz id zadania, do którego chcesz dodać rozwiązanie\n");
-                    Scanner scannerTwo = new Scanner(System.in);
-                    Solution solution = SolutionDao.readByUserIdAndExerciseId(user.getId(), scannerTwo.nextInt());
-                    System.out.println("\nWpisz rozwiązanie\n");
-                    Scanner scannerThree = new Scanner(System.in);
-                    solution.setDescription(scannerThree.nextLine());
-                    SolutionDao.update(solution);
-                    break;
-                }
-                case "view": {
-                    for (Solution solutionEach : SolutionDao.findAllByUserId(user.getId())){
-                        if (solutionEach.getDescription() != null){
-                            System.out.println(solutionEach.toString());
+            try {
+                Scanner scannerOne = new Scanner(System.in);
+                switch (scannerOne.nextLine()) {
+                    case "add": {
+                        for (Exercise exerciseEach : ExerciseDao.findAllByUserIdWithEmptySolution(user.getId())) {
+                            System.out.println(exerciseEach.toString());
                         }
+                        System.out.println("\nWpisz id zadania, do którego chcesz dodać rozwiązanie\n");
+                        Scanner scannerTwo = new Scanner(System.in);
+                        Solution solution = SolutionDao.readByUserIdAndExerciseId(user.getId(), scannerTwo.nextInt());
+                        System.out.println("\nWpisz rozwiązanie\n");
+                        Scanner scannerThree = new Scanner(System.in);
+                        solution.setDescription(scannerThree.nextLine());
+                        SolutionDao.update(solution);
+                        break;
                     }
-                    break;
-                }
-                case "edit": {
-                    for (Solution solutionEach : SolutionDao.findAllByUserId(user.getId())){
-                        if (solutionEach.getDescription() != null){
-                            System.out.println(solutionEach.toString());
+                    case "view": {
+                        for (Solution solutionEach : SolutionDao.findAllByUserId(user.getId())) {
+                            if (solutionEach.getDescription() != null) {
+                                System.out.println(solutionEach.toString());
+                            }
                         }
+                        break;
                     }
-                    System.out.println("\nWpisz id rozwiązania, które chcesz edytować\n");
-                    Scanner scannerTwo = new Scanner(System.in);
-                    Solution editSolution = SolutionDao.read(scannerTwo.nextInt());
-                    System.out.println(editSolution.toString());
-                    StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.append("Zmieniono następujące dane rozwiązania o id ").append(editSolution.getId()).append(": ");
+                    case "edit": {
+                        for (Solution solutionEach : SolutionDao.findAllByUserId(user.getId())) {
+                            if (solutionEach.getDescription() != null) {
+                                System.out.println(solutionEach.toString());
+                            }
+                        }
+                        System.out.println("\nWpisz id rozwiązania, które chcesz edytować\n");
+                        Scanner scannerTwo = new Scanner(System.in);
+                        Solution editSolution = SolutionDao.read(scannerTwo.nextInt());
+                        System.out.println(editSolution.toString());
+                        StringBuilder stringBuilder = new StringBuilder();
+                        stringBuilder.append("Zmieniono następujące dane rozwiązania o id ").append(editSolution.getId()).append(": ");
 
-                    System.out.println("\nWpisz treść rozwiązania lub wpisz null, jeżeli nie chcesz nic zmieniać.\n");
-                    Scanner scannerThree = new Scanner(System.in);
-                    String scannerThreeText = scannerThree.nextLine();
-                    if (!(scannerThreeText.equals("null"))) {
-                        editSolution.setDescription(scannerThreeText);
-                        stringBuilder.append("description, ");
+                        System.out.println("\nWpisz treść rozwiązania lub wpisz null, jeżeli nie chcesz nic zmieniać.\n");
+                        Scanner scannerThree = new Scanner(System.in);
+                        String scannerThreeText = scannerThree.nextLine();
+                        if (!(scannerThreeText.equals("null"))) {
+                            editSolution.setDescription(scannerThreeText);
+                            stringBuilder.append("description, ");
+                        }
+
+                        SolutionDao.update(editSolution);
+                        System.out.println(stringBuilder.toString());
+
+                        break;
                     }
-
-                    SolutionDao.update(editSolution);
-                    System.out.println(stringBuilder.toString());
-
-                    break;
+                    case "quit": {
+                        System.out.println("\nWłaśnie opuszczasz program dodawania rozwiązań.");
+                        programWorking = false;
+                        break;
+                    }
+                    default: {
+                        wrongCommand = true;
+                        break;
+                    }
                 }
-                case "quit": {
-                    System.out.println("\nWłaśnie opuszczasz program dodawania rozwiązań.");
-                    programWorking = false;
-                    break;
-                }
-                default: {
-                    wrongCommand = true;
-                    break;
-                }
+            } catch (Exception e){
+                System.out.println("Wystąpił błąd! Upewnij się, że poprawnie wpisujesz dane.");
             }
         }
     }

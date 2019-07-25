@@ -41,7 +41,8 @@ public class ExerciseDao {
             }
             return exercise;
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Wystąpił błąd! Upewnij się, że poprawnie wpisujesz dane.");
+            //e.printStackTrace();
             return null;
         }
     }
@@ -83,7 +84,8 @@ public class ExerciseDao {
             statement.setInt(1, exerciseId);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Wystąpił błąd! Upewnij się, że poprawnie wpisujesz dane.");
+            //e.printStackTrace();
         }
     }
 

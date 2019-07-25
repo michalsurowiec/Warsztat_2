@@ -31,7 +31,8 @@ public class UserGroupDao {
             }
             return userGroup;
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Wystąpił błąd! Upewnij się, że poprawnie wpisujesz dane.");
+            //e.printStackTrace();
             return null;
         }
     }
@@ -60,7 +61,8 @@ public class UserGroupDao {
             statement.setInt(2, userGroup.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Wystąpił błąd! Upewnij się, że poprawnie wpisujesz dane.");
+            //e.printStackTrace();
         }
     }
 
