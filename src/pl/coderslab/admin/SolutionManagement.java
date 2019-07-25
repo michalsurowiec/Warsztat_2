@@ -9,7 +9,7 @@ import pl.coderslab.plain.User;
 
 import java.util.Scanner;
 
-public class AssignExerciseToUser {
+public class SolutionManagement {
 
     public static void main() {
         boolean programWorking = true;
@@ -72,7 +72,35 @@ public class AssignExerciseToUser {
                     System.out.println("\nWpisz id rozwiązania, które chcesz edytować\n");
                     Scanner scannerThree = new Scanner(System.in);
                     Solution editSolution = SolutionDao.read(scannerThree.nextInt());
-                    //TODO Dodać ścieżkę edytowania w rozwiązaniu następujących pól: rate, commentary, exercise_id, users_id
+                    System.out.println(editSolution.toString());
+
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.append("Zmieniono następujące dane rozwiązania o id ").append(editSolution.getId()).append(": ");
+
+                    for (Exercise exerciseEach : ExerciseDao.findAll()){
+                        System.out.println(exerciseEach.toString());
+                    }
+                    System.out.println("\nWpisz id ćwiczenia lub wpisz 0, jeżeli nie chcesz nic zmieniać.");
+                    Scanner scannerFour = new Scanner(System.in);
+                    int scannerFourInt = scannerFour.nextInt();
+                    if (scannerFourInt != 0) {
+                        editSolution.setId_exercise(scannerFourInt);
+                        stringBuilder.append("id_exercise, ");
+                    }
+
+                    for (User userEach : UserDao.findAll()){
+                        System.out.println(userEach.toString());
+                    }
+                    System.out.println("Wpisz idl użytkownika lub wpisz 0, jeżeli nie chcesz nic zmieniać.");
+                    Scanner scannerFive = new Scanner(System.in);
+                    int scannerFiveInt = scannerFive.nextInt();
+                    if (scannerFiveInt != 0) {
+                        editSolution.setId_users(scannerFiveInt);
+                        stringBuilder.append("id_user");
+                    }
+
+                    SolutionDao.update(editSolution);
+                    System.out.println(stringBuilder.toString());
 
                     break;
                 }

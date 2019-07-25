@@ -1,6 +1,6 @@
 package pl.coderslab.main;
 
-import pl.coderslab.admin.AssignExerciseToUser;
+import pl.coderslab.admin.SolutionManagement;
 import pl.coderslab.admin.ExerciseManagement;
 import pl.coderslab.admin.UserGroupManagement;
 import pl.coderslab.admin.UserManagement;
@@ -30,7 +30,7 @@ public class AdminHub {
             Scanner scanner = new Scanner(System.in);
             switch (scanner.next()) {
                 case "1":
-                    AssignExerciseToUser.main();
+                    SolutionManagement.main();
                     break;
                 case "2":
                     ExerciseManagement.main();
